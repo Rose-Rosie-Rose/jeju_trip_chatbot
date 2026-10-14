@@ -1,0 +1,20 @@
+name: branch-rule
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  check-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 병합 출처 브랜치 검사
+        env:
+          BASE: ${{ github.base_ref }}
+          HEAD: ${{ github.head_ref }}
+        run: |
+          if [ "$BASE" = "main" ] && [ "$HEAD" != "develop" ]; then
+            echo "main에는 develop만 병합할 수 있습니다. (현재: $HEAD)"; exit 1
+          fi
+          if [ "$BASE" = "develop" ] && [[ "$HEAD" != feature/* ]]; then
+            echo "develop에는 feature/* 브랜치만 병합할 수 있습니다. (현재: $HEAD)"; exit 1
+          fi
