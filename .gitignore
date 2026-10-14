@@ -8,6 +8,7 @@
 .venv/
 venv/
 env/
+.env
 .chatPDF/
 
 # Python cache and compiled files
@@ -43,3 +44,4 @@ data/processed/
 
 # pdf file
 .pdf
+.env
