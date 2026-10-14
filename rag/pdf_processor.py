@@ -1,5 +1,6 @@
 
 import uuid
+from pathlib import Path
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -9,7 +10,17 @@ from langchain_chroma import Chroma
 
 def load_and_split_pdf(pdf_path: str):
     """PDF를 로드하고 텍스트를 청크로 분할한다."""
-    loader = PyPDFLoader(pdf_path)
+    path = Path(pdf_path)
+
+    if not path.is_file():
+        raise FileNotFoundError(
+            f"PDF 파일을 찾을 수 없습니다: {pdf_path}"
+        )
+
+    if path.suffix.lower() != ".pdf":
+        raise ValueError("PDF 파일만 처리할 수 있습니다.")
+
+    loader = PyPDFLoader(str(path))
     pages = loader.load()
 
     if not pages:
