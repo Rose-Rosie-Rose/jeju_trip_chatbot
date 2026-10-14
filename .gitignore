@@ -1,4 +1,3 @@
-
 # Environment variables and secrets
 .env
 .env.*
@@ -8,7 +7,6 @@
 .venv/
 venv/
 env/
-.env
 .chatPDF/
 
 # Python cache and compiled files
@@ -37,11 +35,10 @@ desktop.ini
 chroma/
 chroma_db/
 vectorstore/
-data/processed/
+data/
+
+# PDF files
+*.pdf
 
 # Jupyter Notebook
 .ipynb_checkpoints/
-
-# pdf file
-.pdf
-.env
