@@ -1,0 +1,44 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+env/
+.chatPDF/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test and coverage cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE and editor settings
+.vscode/
+.idea/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Local vector databases and generated data
+chroma/
+chroma_db/
+vectorstore/
+data/
+
+# PDF files
+*.pdf
+
+# Jupyter Notebook
+.ipynb_checkpoints/
