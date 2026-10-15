@@ -57,8 +57,6 @@ from typing import Iterator, Literal, TypedDict
 
 import gradio as gr
 
-import test_pdf as rag
-
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
