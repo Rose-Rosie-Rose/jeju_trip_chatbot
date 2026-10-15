@@ -1,0 +1,77 @@
+﻿회차,No,질문 유형,질문,English (EN),정답,판정,챗봇 답변,출처,판정 이유
+1,1,-,아부오름 갔다오는데 얼마나 걸려?,How long does it take to go to Abu Oreum and back?,1 hour,✅,It takes about 1 hour to hike to Abu Oreum (아부오름) and back. The guide does not specify if this includes time spent at the top.,jjmountain.pdf: p.8,"챗봇의 답변은 기대 정답의 핵심 내용과 일치하며, 아부오름까지의 소요 시간을 정확히 언급하고 있습니다."
+1,2,-,갈치는 어느 계절에 가장 많이 먹나요?,In which season is galchi (hairtail fish) eaten the most?,Autumn,✅,"Galchi (갈치) is most enjoyed in the fall, as it is considered the representative fish of that season in Jeju. The guide does not specify any particular dishes or recipes associated with it.",jjfood.pdf: p.10,챗봇의 답변은 갈치가 가을에 가장 많이 먹힌다는 기대 정답과 일치합니다.
+1,3,-,고등어 요리 3개만 추천해줘,Recommend just 3 godeungeo (mackerel) dishes.,"godeungeo-hoe (mackerel sashimi), godeungeo-jorim (braised mackerel), godeungeo-gui (grilled mackerel)",✅,"You should try the following three mackerel dishes:
+
+- 고등어회 (Godeungeo-hwae): Fresh mackerel sashimi that is not fishy and has a rich flavor.
+- 고등어조림 (Godeungeo-jorim): Stewed mackerel with radish and vegetables in a spicy-sweet sauce, perfect for rice.
+- 고등어구이 (Godeungeo-gui): Grilled mackerel seasoned with coarse salt, offering a fresh and savory taste.
+
+The guide does not provide specific restaurant recommendations for these dishes.",jjfood.pdf: p.15,"챗봇이 제시한 고등어 요리 3개가 기대 정답과 일치하며, 설명도 적절하다."
+1,4,-,돔베가 뭐야?,What is dombe?,Cutting board,△,"Dombae-gogi (돔베고기) refers to a dish made from Jeju black pork. The term ""dombae"" means ""cutting board"" in the Jeju dialect, and the dish is served on a cutting board to enjoy the juicy flavors of the meat. It is sliced immediately before serving to retain its moisture and is typically enjoyed with a dipping sauce made from fermented anchovy sauce mixed with soju.",jjfood.pdf: p.17,"챗봇이 '돔베'의 의미를 설명했지만, 기대 정답인 'cutting board'에 대한 직접적인 언급이 부족하고, 추가적인 정보가 포함되어 있어 일부만 맞다."
+1,5,-,제주 바다에서 하면 안되는 금지 행동 있나?,Are there any prohibited activities in the Jeju sea?,"1. Take your trash with you or dispose of it at designated locations.
+2. Do not collect marine life (such as shellfish and seaweed) without permission.
+3. Do not damage fishing facilities or coastal structures.
+4. Refrain from making noise, such as shouting loudly or using speakers.
+5. If bringing a pet, check whether access is permitted and keep it under control safely.",△,"Yes, there are several prohibited activities in the Jeju sea, including:
+
+- Engaging in illegal commercial activities, which can incur a fine of up to 100,000 KRW.
+- Not using a leash for pets, which can result in a fine of 50,000 KRW.
+- Failing to clean up after pets, also resulting in a fine of 50,000 KRW.
+- Using fireworks, which can incur a fine of 50,000 KRW.
+- Cooking or camping, which can result in a fine of 100,000 KRW.
+- Littering, which can incur a fine of 50,000 KRW.
+- Participating in water activities outside designated times, which can result in a fine of up to 200,000 KRW.
+
+The guide does not specify the exact amounts for fines in all situations, as they may vary based on circumstances and legal applications.",jjocean.pdf: p.12,"챗봇 답변은 일부 금지 행동을 언급했지만, 기대 정답의 핵심 내용인 쓰레기 처리, 해양 생물 수집 금지, 어업 시설 손상 금지 등은 포함되지 않았다."
+1,6,-,제주도 보다 밑에 있는 섬이 뭐야?,Which island lies south of Jejudo?,Marado,✅,The island that lies south of Jejudo is Marado (마라도). It is known for its landscape featuring coastal cliffs and a grassland terrain.,jjocean.pdf: p.6,"챗봇의 답변은 기대 정답과 일치하며, 마라도가 제주도보다 아래에 위치한다는 정보를 정확히 전달하고 있습니다."
+1,7,-,돔베고기(흑돼지삽겹살)로 유명한 골목은 어디야?,"Which alley is famous for dombe-gogi (heukdwaeji samgyeopsal, black pork belly)?","Arang Joeul Street, Seogwipo-si",❌,"I'm sorry, I couldn't find that information in the document.",,문서에 정답이 있는데 챗봇이 '찾을 수 없다'고 답했다.
+1,8,-,제주 밤 버스 투어에서 말하는 야경 명소가 어디야?,Where are the night-view spots mentioned on the Jeju Night Bus Tour?,"One of the following: Iho Horse Lighthouse, Dodubong, Jeju International Airport, Gwandeokjeong and Jeju Mokgwana, or Dongmun Market and Sanjicheon",❌,"The night-view spots mentioned on the Jeju Night Bus Tour include:
+
+- Cheonjiyeon Waterfall (천지연폭포) in Seogwipo
+- Dodu Peak (도두봉) for sunset and night views
+- Yongduam (용두암) and Yongyeon Cloud Bridge (용연구름다리)
+- Jaguri Park (자구리공원) near Seogwipo Harbor
+
+These locations offer beautiful night scenery and are great for enjoying the tranquil atmosphere of Jeju at night. 
+
+The guide does not provide specific details about the bus tour schedule or routes.","jjnight.pdf: p.8, jjnight.pdf: p.9",챗봇이 제시한 야경 명소가 기대 정답에 포함된 장소가 없어서 틀렸습니다.
+1,9,-,아부오름에서 서우봉까지 버스로 얼마나 걸려?,How long does it take by bus from Abu Oreum to Seoubong?,Information not available in the source / No answer provided. The document does not include public transportation routes or travel times between the two locations.,✅,"I'm sorry, I couldn't find that information in the document.",,챗봇이 정보가 없다고 답변했으므로 기대 정답과 일치합니다.
+1,10,-,오늘 밤 21시 이후에 알밤골목거리에는 여는 식당이 있나요?,Are any restaurants open after 9 PM tonight on Albam Golmok-geori?,Information not available in the source / No answer provided. The document does not include prices or real-time operating information for specific restaurants.,✅,"I'm sorry, I couldn't find that information in the document.",,챗봇이 정보가 없다고 답변했으므로 기대 정답과 일치합니다.
+1,11,-,마라도행 여객선 오늘 출발 시간이랑 남는 자리 몇 개인지 알려줘,Tell me today's departure times for the ferry to Marado and how many seats are left.,Information not available in the source / No answer provided. Real-time sailing and reservation information is beyond the scope of the document.,✅,"I'm sorry, I couldn't find that information in the document.",,챗봇이 정보가 없다고 답변했으므로 기대 정답과 일치합니다.
+1,12,-,초보자가 가기 좋은 오름 2곳 이상 추천해줘,Recommend at least 2 oreum that are good for beginners.,"Abu Oreum, Seoubong, Gunsan, Byeoldobong, Dodubong",△,"For beginners, I recommend the following oreum:
+
+- Dodu-bong (도두봉): Located near Jeju Airport, it offers a gentle ascent and a great view of planes taking off and landing. The hiking time is about 1 hour.
+- Saebyeol Oreum (새별오름): Known for its beautiful autumn silver grass, it also has a moderate difficulty level and takes about 1 hour to hike.
+
+Both are accessible and provide lovely views.",jjmountain.pdf: p.10,"챗봇이 추천한 오름 중 일부는 기대 정답에 포함되지 않지만, 초보자에게 적합한 오름을 제시한 점은 긍정적이다."
+1,13,-,서우봉과 도두봉에서 볼 수 있는 명소가 어디야?,What attractions can be seen from Seoubong and Dodubong?,"The guidebook states that Seoubong offers views of Hamdeok Beach and Bukchon Village, while Dodubong offers views of airplanes taking off and landing and the coastal road scenery.",△,"Seoubong (서우봉) offers views of the emerald sea and the surrounding landscape, while Dodubong (도두봉) allows visitors to see airplanes taking off and landing due to its proximity to the airport. The guide does not provide additional details about other specific attractions visible from these locations.","jjmountain.pdf: p.10, jjmountain.pdf: p.16","서우봉에서의 경치에 대한 정보가 일부 맞지만, 기대 정답에 언급된 해변과 마을에 대한 정보가 빠져 있다. 도두봉에 대한 정보는 맞지만, 추가적인 세부사항이 없다는 점에서 일부만 맞는 답변이다."
+1,14,-,제주도의 대표적인 전통 국물 요리 2가지를 알려줘,Tell me 2 representative traditional soup dishes of Jejudo.,"gogi-guksu (pork noodle soup), mom-guk (pork soup with gulfweed), gosari-yukgaejang (spicy beef-style soup with bracken and pork)",△,"Two representative traditional soup dishes of Jejudo are:
+
+- Momguk (몸국): Made with the local seaweed called mom (모자반) and pork broth, this soup is thickened with buckwheat flour and has a rich, oily flavor.
+- Gosa-ri Yukgaejang (고사리육개장): This spicy soup is made with boiled pork, fernbrake, and a thickened broth with buckwheat flour, resulting in a hearty and flavorful dish.
+
+The guide does not provide specific details about their prices or serving sizes.",jjfood.pdf: p.18,"챗봇이 제시한 두 가지 요리 중 하나는 기대 정답에 포함되어 있지만, 'gogi-guksu'는 언급되지 않아 일부 정보가 빠져 있다."
+1,15,-,"보목 자리돔 축제 일정, 장소, 체험 등을 알려줘","Tell me the schedule, venue, and activities of the Bomok Jaridom (damselfish) Festival.","May–June, around Bomok Port in Seogwipo-si; activities such as catching Jaridom (damselfish) with bare hands are introduced.",✅,"The Bomok Jaridom (자리돔) Festival takes place between May and June in the Bomok area of Seogwipo City. Activities include hands-on experiences like catching damselfish, releasing wish lanterns, catching sea cucumbers and sea snails, and walking along the Bomok Olle Trail. The festival lasts for three days and features various events organized by the local community, celebrating the region's specialty, the damselfish. Visitors can also enjoy tastings of dishes made with damselfish, such as grilled damselfish, damselfish salad, and damselfish sashimi.",jjfood.pdf: p.8,"챗봇의 답변은 축제 일정과 장소, 체험 활동에 대한 핵심 내용을 모두 포함하고 있어 기대 정답과 일치합니다."
+1,16,-,(이거 질의 연속으로 할 때=앞내용기억하나? 쓰기 좋을 것 같아요. O-비교종합1 바로다음에) 알려준 오름 2곳의 일반적인 탐방 시간을 비교해줘.,Compare the typical hiking times of the 2 oreum you recommended.,Abu Oreum: 1 hour; Gunsan: 1–2 hours; Byeoldobong: 1 hour; Dodubong: 1 hour,❌,"The typical hiking time for Geomi Oreum (거미오름) is about 2 hours, while for Andol Oreum (안돌오름), it is approximately 1 hour. Therefore, Geomi Oreum takes longer to hike compared to Andol Oreum. 
+
+The guide does not provide specific details about the difficulty levels or other characteristics of these hikes.","jjmountain.pdf: p.11, jjmountain.pdf: p.25","챗봇이 질문에 대한 올바른 탐방 시간을 제공하지 않았고, 잘못된 정보를 제시했다."
+1,17,-,제주도 시내에 밤산책하기 좋은 곳과 서귀포에서 야식 먹기 좋은 장소를 각각 알려줘,Tell me good places for a night walk in downtown Jeju-si and good places for a late-night snack in Seogwipo.,"Jeju-si: Tapdong Square and Culture Street, etc. / Seogwipo: Arang Joeul Street",△,"For a night walk in downtown Jeju-si, you can enjoy:
+
+- Sanjicheon (산지천) promenade, which is beautifully lit at night and features a fountain show.
+- Nuwemaru Street (누웨마루거리), a pedestrian-friendly area with vibrant shops and cafes.
+- Dongmun Traditional Market (동문재래시장), where you can experience the lively atmosphere and night market.
+
+In Seogwipo, for late-night snacks, visit:
+
+- Arangjoeul Street (아랑조을거리), known for local delicacies like Heuk-dwaeji (black pork), Galchi-jorim (braised hairtail), and Dombae-gogi (돼지 고기).
+- Ijeongseop Street (이중섭거리), which has various shops and eateries that offer a cozy night stroll and snacks.
+
+The guide does not specify exact opening hours for these places, so it's advisable to check before visiting.","jjnight.pdf: p.7, jjnight.pdf: p.8, jjnight.pdf: p.9","제주도 시내의 추천 장소는 일부 맞지만, 기대 정답에 포함된 Tapdong Square와 Culture Street이 빠져 있다. 서귀포의 추천 장소는 정확하게 맞았다."
+1,18,-,등산이 익숙하지 않은데 가볍게 올라갈 만한 오름을 알려줘,I'm not used to hiking. Which oreum can I climb easily?,"The guidebook lists Abu Oreum, Seoubong, Gunsan, Byeoldobong, and Dodubong as beginner-friendly oreum (volcanic cones).",△,"You can easily climb Doo-doo-bong (도두봉) and Saebyeol Oreum (새별오름). Both are beginner-friendly with gentle slopes and take about an hour to hike. Doo-doo-bong offers views of planes taking off and landing, while Saebyeol Oreum is known for its beautiful autumn silver grass. 
+
+The guide does not provide specific details about their opening hours or any potential changes, so it's best to check before visiting.","jjmountain.pdf: p.10, jjmountain.pdf: p.25","챗봇이 추천한 오름 중 일부는 기대 정답에 포함되어 있지 않지만, 초보자에게 적합하다는 핵심 내용은 맞습니다."
+1,19,-,비행기가 지나다니는 거 볼 수 있는 데 어디야,Where can I watch planes flying overhead?,Dodubong. The guidebook states that visitors can watch airplanes taking off and landing near Jeju International Airport.,✅,"You can watch planes flying overhead at Dodu-bong (도두봉), which is close to Jeju Airport. It offers a great view of aircraft taking off and landing. The hike to the top takes about 10-15 minutes, making it an easy climb. 
+
+The guide does not provide specific details about the opening hours or any potential changes, so it's best to check before visiting.","jjmountain.pdf: p.10, jjnight.pdf: p.6","챗봇의 답변은 기대 정답의 핵심 내용을 잘 전달하고 있으며, Dodu-bong에서 비행기를 볼 수 있다는 정보가 포함되어 있습니다."
+1,20,-,안 뜨거운 국물 음식도 있음?,Are there any soup dishes that aren't served hot?,"Jarimulhoe (cold raw damselfish soup). It is made by pouring cold water over thinly sliced Jaridom (damselfish), vegetables, and seasoning. Hanchi mulhoe (cold raw squid soup). Fresh hanchi (spear squid) is thinly sliced, mixed with crunchy vegetables and seasoning sauce, and then topped with cold water.",❌,"I'm sorry, I couldn't find that information in the document.",,문서에 정답이 있는데 챗봇이 '찾을 수 없다'고 답했다.
