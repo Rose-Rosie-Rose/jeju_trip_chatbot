@@ -1,5 +1,5 @@
-
 import os
+import re
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -18,6 +18,18 @@ for pdf_path in PDF_PATHS:
 
 MODEL = "gpt-4o-mini"
 TOP_K = 4
+
+# 청크 설정 (eval/tune_chunks.py 결과로 가장 점수가 높은 값을 넣으세요)
+CHUNK_SIZE = 500
+CHUNK_OVERLAP = 100
+
+# 외국인 사용자에게 보여줄 PDF 영어 제목 (파일명 → 제목)
+PDF_TITLES = {
+    "jjfood": "Jeju Food Guide",
+    "jjmountain": "Jeju Oreum & Mountain Guide",
+    "jjnight": "Jeju Night Tour Guide",
+    "jjocean": "Jeju Ocean Guide",
+}
 
 load_dotenv(BASE_DIR / ".env")
 
@@ -38,16 +50,82 @@ Answer ONLY using the document excerpts provided below.
 The excerpts may be written in Korean. Read them carefully
 and answer in clear, natural English.
 
+Each excerpt starts with a tag like [#3 | Jeju Food Guide | p.5].
+
 Rules:
 - If the answer is not in the excerpts, reply exactly:
   "I'm sorry, I couldn't find that information in the document."
+  and nothing else.
 - Never make up facts, prices, opening hours, or locations.
 - For Korean place names, give the English romanization with
   the Korean in parentheses, e.g. Seongsan Ilchulbong (성산일출봉).
-- At the end, list the pages you used, e.g. (Source: p.2, p.5).
+- Do NOT write any source list or page numbers in your answer.
+- If you did answer, add one last line with the excerpt numbers
+  you actually used, exactly in this format: USED: 1, 3
 """
 
+NOT_FOUND = "I'm sorry, I couldn't find that information in the document."
 
+
+# ---------- 벡터 DB ----------
+def build_vector_db(
+    chunk_size: int = CHUNK_SIZE,
+    chunk_overlap: int = CHUNK_OVERLAP,
+    collection_name: str = "travel_pdfs",
+    verbose: bool = True,
+):
+    """PDF들을 청크로 나눠 벡터 DB를 만든다. (청크 튜닝 스크립트에서도 사용)"""
+    from langchain_community.document_loaders import PyPDFLoader
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+    from langchain_openai import OpenAIEmbeddings
+    from langchain_chroma import Chroma
+
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+    )
+
+    all_chunks = []
+    total_pages = 0
+
+    for pdf_path in PDF_PATHS:
+        pages = PyPDFLoader(str(pdf_path)).load()
+        chunks = splitter.split_documents(pages)
+
+        # 출처 파일명을 메타데이터에 보존
+        for chunk in chunks:
+            chunk.metadata["source_file"] = pdf_path.name
+
+        all_chunks.extend(chunks)
+        total_pages += len(pages)
+
+        if verbose:
+            print(f"\nPDF 처리 중: {pdf_path.name}")
+            print(f"  페이지 수: {len(pages)}")
+            print(f"  청크 수: {len(chunks)}")
+
+    embeddings = OpenAIEmbeddings(
+        model="text-embedding-3-small",
+        api_key=api_key,
+    )
+
+    db = Chroma.from_documents(
+        documents=all_chunks,
+        embedding=embeddings,
+        collection_name=collection_name,
+    )
+
+    if verbose:
+        print("\n전체 PDF 벡터 DB 생성 성공!")
+        print(f"PDF 파일 수: {len(PDF_PATHS)}")
+        print(f"전체 페이지 수: {total_pages}")
+        print(f"전체 청크 수: {len(all_chunks)}")
+        print(f"청크 설정: size={chunk_size}, overlap={chunk_overlap}")
+
+    return db
+
+
+# ---------- 검색 / 답변 ----------
 def to_korean_query(question: str) -> str:
     """영어 질문을 한국어 문서 검색용 질의로 번역한다."""
     res = client.chat.completions.create(
@@ -86,6 +164,7 @@ def retrieve(db, question: str):
 
         for doc in results:
             key = (
+                doc.metadata.get("source_file"),
                 doc.metadata.get("page"),
                 doc.page_content,
             )
@@ -97,12 +176,31 @@ def retrieve(db, question: str):
     return docs
 
 
-def answer_in_english(question: str, docs) -> str:
-    """검색된 PDF 내용을 근거로 영어 답변을 생성한다."""
+def pdf_file(doc) -> str:
+    """원본 PDF 파일명 (예: jjfood.pdf)"""
+    return doc.metadata.get("source_file", "Unknown")
+
+
+def pdf_title(doc) -> str:
+    """외국인에게 보여줄 PDF 영어 제목 (없으면 파일명)"""
+    stem = Path(pdf_file(doc)).stem
+    return PDF_TITLES.get(stem, stem)
+
+
+def page_no(doc) -> int:
+    """PDF 페이지 번호 (metadata['page']는 0부터 시작하므로 +1)"""
+    return doc.metadata.get("page", 0) + 1
+
+
+def answer_in_english(question: str, docs):
+    """검색된 PDF 내용을 근거로 영어 답변을 생성한다.
+
+    반환값: (답변 텍스트, 실제로 사용한 문서 리스트)
+    """
     context = "\n\n".join(
-        f"[p.{doc.metadata.get('page', 0) + 1}]\n"
+        f"[#{i} | {pdf_title(doc)} | p.{page_no(doc)}]\n"
         f"{doc.page_content}"
-        for doc in docs
+        for i, doc in enumerate(docs, start=1)
     )
 
     res = client.chat.completions.create(
@@ -123,9 +221,63 @@ def answer_in_english(question: str, docs) -> str:
         ],
     )
 
-    return res.choices[0].message.content.strip()
+    text = res.choices[0].message.content.strip()
+
+    # 문서에 답이 없으면 출처 없이 반환
+    if NOT_FOUND in text:
+        return NOT_FOUND, []
+
+    # "USED: 1, 3" 줄을 찾아 떼어내고, 실제 사용한 문서만 추림
+    used_docs = []
+    match = re.search(r"^\s*USED\s*:\s*(.*)$", text, re.IGNORECASE | re.MULTILINE)
+    if match:
+        for num in re.findall(r"\d+", match.group(1)):
+            idx = int(num)
+            if 1 <= idx <= len(docs) and docs[idx - 1] not in used_docs:
+                used_docs.append(docs[idx - 1])
+        text = (text[:match.start()] + text[match.end():]).strip()
+
+    return text, used_docs
 
 
+# ---------- 출처 표시 ----------
+def _format_pages(pages) -> str:
+    """[3, 4, 5, 9] → 'pages 3–5, 9' / [7] → 'page 7'"""
+    pages = sorted(set(pages))
+    ranges = []
+    start = prev = pages[0]
+    for p in pages[1:]:
+        if p == prev + 1:
+            prev = p
+            continue
+        ranges.append(f"{start}–{prev}" if start != prev else f"{start}")
+        start = prev = p
+    ranges.append(f"{start}–{prev}" if start != prev else f"{start}")
+
+    label = "page" if len(pages) == 1 else "pages"
+    return f"{label} {', '.join(ranges)}"
+
+
+def format_sources(docs) -> str:
+    """외국인 사용자용 출처 문자열을 만든다.
+
+    예)
+    Sources:
+      • Jeju Food Guide (jjfood.pdf) — pages 24–25
+      • Jeju Night Tour Guide (jjnight.pdf) — page 7
+    """
+    by_pdf = {}
+    for doc in docs:
+        key = (pdf_title(doc), pdf_file(doc))
+        by_pdf.setdefault(key, []).append(page_no(doc))
+
+    lines = ["Sources:"]
+    for (title, filename), pages in sorted(by_pdf.items()):
+        lines.append(f"  • {title} ({filename}) — {_format_pages(pages)}")
+    return "\n".join(lines)
+
+
+# ---------- 실행 ----------
 def main():
     print("=" * 40)
     print("PDF RAG Travel Chatbot")
@@ -142,53 +294,8 @@ def main():
             f"PDF 폴더에 PDF 파일이 없습니다: {PDF_DIR}"
         )
 
-    # 2. 각 PDF를 처리해 문서 청크 수집
-    from langchain_community.document_loaders import PyPDFLoader
-    from langchain_text_splitters import RecursiveCharacterTextSplitter
-    from langchain_openai import OpenAIEmbeddings
-    from langchain_chroma import Chroma
-
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=100,
-    )
-
-    all_chunks = []
-    total_pages = 0
-
-    for pdf_path in PDF_PATHS:
-        print(f"\nPDF 처리 중: {pdf_path.name}")
-
-        loader = PyPDFLoader(str(pdf_path))
-        pages = loader.load()
-        chunks = splitter.split_documents(pages)
-
-        # 출처 파일명을 메타데이터에 보존
-        for chunk in chunks:
-            chunk.metadata["source_file"] = pdf_path.name
-
-        all_chunks.extend(chunks)
-        total_pages += len(pages)
-
-        print(f"  페이지 수: {len(pages)}")
-        print(f"  청크 수: {len(chunks)}")
-
-    # 3. 모든 PDF의 청크로 벡터 DB 생성
-    embeddings = OpenAIEmbeddings(
-        model="text-embedding-3-small",
-        api_key=api_key,
-    )
-
-    db = Chroma.from_documents(
-        documents=all_chunks,
-        embedding=embeddings,
-        collection_name="travel_pdfs",
-    )
-
-    print("\n전체 PDF 벡터 DB 생성 성공!")
-    print(f"PDF 파일 수: {len(PDF_PATHS)}")
-    print(f"전체 페이지 수: {total_pages}")
-    print(f"전체 청크 수: {len(all_chunks)}")
+    # 2~3. PDF 청크 → 벡터 DB
+    db = build_vector_db()
 
     # 4. 질의응답
     print("\n챗봇이 준비되었습니다. Enter 또는 q를 입력하면 종료합니다.")
@@ -204,27 +311,18 @@ def main():
             docs = retrieve(db, question)
 
             if not docs:
-                print(
-                    "\nI'm sorry, I couldn't find that information "
-                    "in the document."
-                )
+                print(f"\n{NOT_FOUND}")
                 continue
 
+            answer, used_docs = answer_in_english(question, docs)
+
             print("\n--- Answer ---")
-            print(answer_in_english(question, docs))
+            print(answer)
 
-            # 출처 PDF 파일명과 페이지 표시
-            sources = sorted({
-                (
-                    doc.metadata.get("source_file", "Unknown"),
-                    doc.metadata.get("page", 0) + 1,
-                )
-                for doc in docs
-            })
-
-            print("\n--- Sources ---")
-            for filename, page in sources:
-                print(f"{filename}: p.{page}")
+            # 답을 찾았을 때만, 실제 사용한 페이지를 출처로 표시
+            if used_docs:
+                print()
+                print(format_sources(used_docs))
 
         except Exception as e:
             print(f"\n오류가 발생했습니다: {e}")
