@@ -22,8 +22,8 @@ PDF_DIR = BASE_DIR / "data" / "pdfs"
 PDF_PATHS = list(PDF_DIR.glob("*.pdf"))
 
 MODEL = "gpt-4o-mini"
-TOP_K = 5      # 검색어·검색 방식마다 가져올 청크 수
-MAX_DOCS = 8   # 답변 생성에 넘길 최대 청크 수 (RRF 상위)
+TOP_K = 7      # 검색어·검색 방식마다 가져올 청크 수
+MAX_DOCS = 10  # 답변 생성에 넘길 최대 청크 수 (RRF 상위)
 RRF_K = 60
 
 # 청크 설정 (eval/Tune_chunks.py 결과 1위: size=800, overlap=150 → 72.5점)
@@ -76,6 +76,16 @@ Rules:
   in order with its address, 탐방시간 (total hiking/visit time), 난이도
   (difficulty), and nearby spots. Match the block to the right place and use
   it for questions about time, difficulty, or location.
+- For hiking or visit time, answer with the 탐방시간 value from the info
+  block. A description like "10분 정도면 오를 수 있다" is only the time to
+  the summit; mention it as extra detail, never as the hiking time.
+- 탐방시간 is the total time for the whole visit, already including going
+  up and coming back. For "how long to go and come back", give that value
+  as it is; never double it.
+- When an excerpt (including a table of contents) lists places under a
+  heading that matches the question, such as 초보자를 위한 오름 (oreums for
+  beginners), recommend places from that heading only. Do not add places
+  that appear under a different heading on the same page.
 - The excerpts may not use the user's exact words. Answer from what the
   descriptions clearly imply (e.g. a trail described as flat and short suits
   beginners) instead of saying the information is missing.
@@ -183,10 +193,19 @@ Rules for "queries":
 - Convert romanized or misspelled Korean names to correct Hangul
   (e.g. Seongsan Ilchulbong → 성산일출봉, heukdwaeji → 흑돼지).
 - Add at most 2 more short queries, only when the question asks about several
-  things (one query per thing) or describes something by its features.
+  things (one query per thing), describes something by its features, asks
+  which street, alley, or area is known for something, or asks for
+  recommendations.
   For features, use the descriptive words a Korean guidebook would likely use
   instead of a literal translation (e.g. "not spicy" → 순하고 담백한,
   "for a rainy day" → 실내, 따뜻한 국물). Keep them specific.
+- Turn negative descriptions into the positive words a guidebook would use
+  (e.g. "not hot", "cold soup" → 시원한 국물, 물회; "not spicy" → 순한, 담백한).
+- For questions asking which street, alley, or area is famous for something,
+  add a query combining it with 거리, 골목, or 먹거리 골목
+  (e.g. "alley famous for dombe-gogi" → 돔베고기 먹거리 골목 거리).
+- For recommendation questions, add a query in the guidebook's heading style
+  (e.g. "for beginners" → 초보자를 위한 오름, "for photos" → 사진 찍기 좋은 오름).
 """
 
 
