@@ -48,13 +48,18 @@ from __future__ import annotations
 
 import base64
 import json
+import logging
 import mimetypes
 import os
-import time
+import threading
 from pathlib import Path
 from typing import Iterator, Literal, TypedDict
 
 import gradio as gr
+
+import test_pdf as rag
+
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # 경로 상수
@@ -159,7 +164,11 @@ FONT_HEAD = """
 # ★ 백엔드 연결 지점 ★
 # ===========================================================================
 def generate_reply(message: str, history: History) -> Iterator[str]:
-    """사용자 메시지에 대한 봇 답변을 만듭니다. ← 실제 모델/RAG 호출로 교체하세요.
+    """사용자 메시지에 대한 봇 답변을 만듭니다.
+
+    test_pdf.py 의 RAG 파이프라인을 사용합니다.
+      검색(영어 질문 + 한국어 번역 질문) → 답변 생성(영어) → 실제 사용한 PDF·페이지를 출처로 덧붙임
+    현재는 이번 질문만으로 검색·답변하며, history 는 사용하지 않습니다.
 
     Args:
         message: 사용자가 방금 보낸 문장 (공백 제거된 str, 빈 문자열은 들어오지 않음)
@@ -184,10 +193,55 @@ def generate_reply(message: str, history: History) -> Iterator[str]:
         docs = retriever.search(message, k=4)
         yield rag_chain.invoke({"question": message, "context": docs, "history": history})
     """
-    demo = f'Sample reply to "{message}". Replace generate_reply() with your model call.'
-    for ch in demo:
-        time.sleep(0.015)
-        yield ch
+    try:
+        docs = rag.retrieve(get_db(), message)
+        if not docs:
+            yield rag.NOT_FOUND
+            return
+
+        answer, used_docs = rag.answer_in_english(message, docs)
+    except Exception:
+        logger.exception("RAG 답변 생성 실패: %s", message)
+        raise
+
+    yield answer
+    if used_docs:
+        yield "\n\n" + format_sources_md(used_docs)
+
+
+# ---------------------------------------------------------------------------
+# RAG 벡터 DB / 출처 표시
+# ---------------------------------------------------------------------------
+_db = None
+_db_lock = threading.Lock()
+
+
+def get_db():
+    """data/pdfs 의 PDF로 만든 벡터 DB. 처음 한 번만 만들고 이후에는 재사용합니다."""
+    global _db
+    with _db_lock:
+        if _db is None:
+            if not rag.PDF_PATHS:
+                raise FileNotFoundError(f"PDF 폴더에 PDF 파일이 없습니다: {rag.PDF_DIR}")
+            _db = rag.build_vector_db()
+    return _db
+
+
+def format_sources_md(docs) -> str:
+    """실제 답변에 사용한 PDF·페이지를 마크다운 목록으로 만듭니다.
+
+    예)
+    **Sources**
+    - Jeju Food Guide (jjfood.pdf) — pages 13–15
+    """
+    by_pdf: dict[tuple[str, str], list[int]] = {}
+    for doc in docs:
+        by_pdf.setdefault((rag.pdf_title(doc), rag.pdf_file(doc)), []).append(rag.page_no(doc))
+
+    lines = [f'**{S["chat"]["sources"]}**']
+    for (title, filename), pages in sorted(by_pdf.items()):
+        lines.append(f"- {title} ({filename}) — {rag._format_pages(pages)}")
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
@@ -360,6 +414,9 @@ with gr.Blocks(title=S["page_title"], fill_height=True, elem_id="app-shell") as 
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+    # 첫 질문이 오래 걸리지 않도록 서버 시작 전에 PDF 벡터 DB를 미리 만듭니다.
+    get_db()
     # 배포 시 자주 바꾸는 옵션: server_name="0.0.0.0", server_port=7860, root_path="/chat"
     demo.launch(
         css=build_css(),
