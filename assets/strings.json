@@ -9,19 +9,19 @@
   "default_locale": "en",
   "locales": {
     "en": {
-      "page_title": "Chatbot AI",
+      "page_title": "WhatHowMan-Bot",
       "header": {
-        "title": "Chatbot AI",
+        "title": "WhatHowMan-Bot",
         "status_online": "Online",
         "new_chat": "New chat"
       },
       "composer": {
-        "placeholder": "Feel free to ask!",
+        "placeholder": "Ask me about JEJU Island!",
         "send": "Send",
         "empty_warning": "Please type a message."
       },
       "chat": {
-        "greeting": "Hello there! How may I assist you today?",
+        "greeting": "Hello! What would you like to know about JEJU Island?",
         "error": "Something went wrong. Please try again in a moment.",
         "copy": "Copy",
         "copied": "Copied",
