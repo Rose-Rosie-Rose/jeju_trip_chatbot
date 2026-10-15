@@ -1,0 +1,19 @@
+# Python 3.11.9
+# 직접 사용하는 패키지만 버전 고정 (하위 의존성은 pip이 자동 설치)
+
+# UI
+gradio==6.30.0
+
+# RAG
+openai==2.54.0
+langchain-core==0.3.86
+langchain-community==0.3.31
+langchain-openai==0.3.35
+langchain-chroma==0.2.6
+langchain-text-splitters==0.3.11
+chromadb==1.5.9
+pypdf==6.20.1
+python-dotenv==1.2.4
+
+# 평가 스크립트 (eval/)
+pandas==3.0.6

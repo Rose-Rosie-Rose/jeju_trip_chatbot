@@ -1,0 +1,604 @@
+/* =====================================================================
+   app.css — tokens.css 의 변수만 사용하는 컴포넌트 스타일 + 애니메이션
+   Gradio 6 DOM 기준. Gradio 기본 테마를 덮어쓰기 위해 id 선택자를 씁니다.
+   ===================================================================== */
+
+/* ---------- Page shell (모바일 한 화면) ---------- */
+/* 이 디자인은 라이트 전용 → OS 가 다크 모드여도 항상 라이트로 표시
+   (Gradio 가 body 에 붙이는 .dark 클래스는 effects.js 가 제거) */
+:root {
+  color-scheme: light;
+}
+html,
+body,
+body.dark {
+  background: #ece6dc !important; /* 데스크톱에서 폰 프레임 바깥 */
+}
+.gradio-container {
+  max-width: var(--app-width) !important;
+  width: 100% !important;
+  min-height: 100dvh !important;
+  height: 100dvh;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: var(--bg-app) !important;
+  font-family: var(--font-family) !important;
+  color: var(--color-text);
+  overflow: hidden;
+}
+.gradio-container .main,
+.gradio-container main,
+.gradio-container main > .wrap,
+.gradio-container .contain {
+  padding: 0 !important;
+  height: 100%;
+}
+.gradio-container .contain > .column {
+  gap: 0 !important;
+  height: 100%;
+}
+footer {
+  display: none !important;
+}
+
+/* Gradio 블록 기본 테두리/배경 제거 */
+#app-header .block,
+#composer .block,
+#chat-page .block {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Header ---------- */
+#app-header {
+  flex: 0 0 auto;
+  position: relative;
+  height: var(--header-height);
+  padding: 0 var(--gutter) !important;  align-items: flex-start !important;
+  border-bottom: 1px solid var(--header-divider);
+  flex-wrap: nowrap !important;
+  gap: 0 !important;
+}
+#header-title-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-left: 24px; /* 오른쪽 아이콘 폭만큼 보정해 중앙 정렬 */
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  line-height: 25px;
+}
+.online-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-online);
+  transform: translateY(-4px);
+}
+.online-dot::after {
+  /* 살아있는 느낌의 링 */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-online);
+  animation: online-ping 2.4s var(--ease-out) infinite;
+}
+
+/* ---------- Icon buttons (공통) ---------- */
+#new-chat-btn,
+#send-btn,
+.nav-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--dur-base) var(--ease-spring),
+    box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    opacity var(--dur-base) var(--ease-out);
+}
+
+#new-chat-btn {
+  flex: 0 0 24px !important;
+  width: 24px !important;
+  min-width: 24px !important;
+  height: 24px !important;
+  padding: 0 !important;
+  margin-top: 12px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+#new-chat-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--icon-new-chat) center / 24px 24px no-repeat;
+  transition: transform var(--dur-base) var(--ease-spring);
+}
+#new-chat-btn:hover::before {
+  transform: rotate(-10deg) scale(1.12);
+}
+#new-chat-btn:active::before {
+  transform: scale(0.85);
+}
+#new-chat-btn:focus-visible {
+  box-shadow: var(--focus-ring) !important;
+}
+
+/* ---------- Chat page ---------- */
+#chat-page {
+  flex: 1 1 auto !important;
+  min-height: 0;
+  padding: 0 var(--gutter) !important;
+  gap: 0 !important;
+}
+#chat {
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 0;
+  background: transparent !important;
+  border: 0 !important;
+}
+#chat .top-panel {
+  display: none !important;
+} /* 기본 Clear 버튼 숨김 */
+#chat .bubble-wrap {
+  background: transparent !important;
+  padding: 44px 0 24px !important;
+}
+
+/* 말풍선 + 복사 버튼을 디자인처럼 가로로 배치 */
+#chat .message-wrap {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 20px;
+  column-gap: 10px;
+  row-gap: var(--bubble-gap);
+  align-items: end;
+}
+
+#chat .message-row {
+  grid-column: 1;
+  min-width: 0;
+  width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  animation: bubble-in var(--dur-slow) var(--ease-out) both;
+}
+#chat .message-row.user-row {
+  grid-column: 1 / -1;
+  justify-content: flex-end;
+}
+#chat .message-buttons-left {
+  grid-column: 2;
+  width: fit-content;
+  margin: 0 !important;
+  padding: 0 !important;
+  align-self: end;
+}
+#chat .message-buttons-right {
+  display: none !important;
+} /* 사용자 말풍선은 복사 버튼 없음 */
+
+#chat .message-row .flex-wrap {
+  width: auto;
+}
+#chat .message-row .message,
+#chat .message-row .message.panel-full-width {
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+#chat .message-row [data-testid="user"],
+#chat .message-row [data-testid="bot"] {
+  padding: var(--bubble-padding);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  word-break: keep-all; /* 한글 단어 중간 줄바꿈 방지 */
+  overflow-wrap: anywhere;
+}
+#chat .user-row .flex-wrap {
+  max-width: var(--bubble-user-max);
+}
+#chat .bot-row .flex-wrap {
+  width: 100%;
+  max-width: 100%;
+}
+#chat .message-row [data-testid="user"] {
+  background: var(--bubble-user-bg);
+  color: var(--bubble-user-text);
+  border-radius: var(--bubble-radius) var(--bubble-radius) 0
+    var(--bubble-radius);
+}
+#chat .user-row.is-latest [data-testid="user"] {
+  background: var(--bubble-user-bg-latest);
+} /* effects.js 가 마지막 사용자 말풍선에 부여 */
+#chat .message-row [data-testid="bot"] {
+  background: var(--bubble-bot-bg);
+  color: var(--bubble-bot-text);
+  border: 1px solid var(--bubble-bot-border);
+  border-radius: 0 var(--bubble-radius) var(--bubble-radius)
+    var(--bubble-radius);
+}
+#chat .message-content .prose,
+#chat .message-content .prose * {
+  color: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+#chat .message-content .prose p {
+  margin: 0 !important;
+}
+#chat .message-content .prose strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* 복사 버튼 → Figma copy 아이콘 */
+#chat .message-buttons .icon-button-wrapper {
+  width: 20px;
+  min-width: 20px;
+  margin: 0 !important;
+  justify-content: flex-start !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+#chat .message-buttons .icon-button {
+  position: relative;
+  width: 20px !important;
+  min-width: 20px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--color-primary) !important;
+  transition: transform var(--dur-base) var(--ease-spring);
+}
+#chat .message-buttons .icon-button[aria-label="Copy message"] svg {
+  opacity: 0;
+}
+#chat .message-buttons .icon-button[aria-label="Copy message"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--icon-copy) center / 20px 30px no-repeat;
+}
+#chat .message-buttons .icon-button svg {
+  animation: pop-in var(--dur-base) var(--ease-spring);
+}
+#chat .message-buttons .icon-button:hover {
+  transform: scale(1.12);
+}
+#chat .message-buttons .icon-button:active {
+  transform: scale(0.85);
+}
+
+/* ---------- Composer ---------- */
+#composer {
+  flex: 0 0 auto;
+  flex-wrap: nowrap !important;
+  gap: var(--composer-gap) !important;
+  align-items: flex-end !important;
+  padding: 12px 0 22px !important;
+}
+#composer-input {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+#composer-input label {
+  display: block;
+}
+#composer-input .input-container,
+#composer-input textarea {
+  background: var(--surface-input) !important;
+}
+#composer-input textarea {
+  min-height: var(--input-height) !important;
+  padding: 15px var(--input-padding-x) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: var(--input-radius) !important;
+  box-shadow: var(--shadow-700) !important;
+  font-family: var(--font-family) !important;
+  font-size: var(--font-size-body) !important;
+  font-weight: var(--font-weight-medium);
+  line-height: 22px !important;
+  color: var(--color-text) !important;
+  text-align: left;
+  resize: none;
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+#composer-input textarea::placeholder {
+  color: var(--color-text-muted);
+  text-align: left;
+}
+#composer-input textarea:focus {
+  outline: none !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: var(--shadow-700), var(--focus-ring) !important;
+}
+#composer-input textarea:focus::placeholder {
+  opacity: 0.5;
+  transition: opacity var(--dur-base);
+}
+
+/* ---------- Send button + 반응형 애니메이션 ---------- */
+#send-btn {
+  flex: 0 0 var(--send-size) !important;
+  width: var(--send-size) !important;
+  height: var(--send-size) !important;
+  min-width: var(--send-size) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: var(--color-primary) !important;
+  box-shadow: none !important;
+}
+#send-btn::before {
+  /* 종이비행기 아이콘 */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--icon-send) calc(50% + 2px) 50% / 24px 24px no-repeat;
+  z-index: 1;
+  transition: transform var(--dur-base) var(--ease-spring);
+}
+@media (hover: hover) {
+  #send-btn:hover:not(:disabled) {
+    transform: translateY(var(--hover-lift)) scale(1.04);
+    box-shadow: var(--shadow-send-hover) !important;
+  }
+  #send-btn:hover:not(:disabled)::before {
+    transform: translateX(2px) rotate(-8deg);
+  }
+}
+#send-btn:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+  transition-duration: var(--dur-fast);
+}
+#send-btn:focus-visible {
+  box-shadow: var(--focus-ring) !important;
+  outline: none;
+}
+
+/* 전송 순간: 아이콘이 날아갔다가 다시 등장 (effects.js 가 .fx-fly 부여) */
+#send-btn.fx-fly::before {
+  animation: plane-fly 560ms var(--ease-out);
+}
+
+/* 답변 생성 중: 버튼 잠금 + 펄스 링 */
+#send-btn.pending,
+#send-btn:disabled {
+  opacity: 1 !important;
+  filter: none !important;
+  cursor: progress !important;
+  animation: pending-pulse 1.3s ease-out infinite;
+}
+#send-btn.pending::before {
+  animation: plane-hover 1.3s ease-in-out infinite;
+}
+
+/* 리플 (effects.js 가 span.fx-ink 삽입) */
+.fx-ink {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(0);
+  animation: ripple 600ms var(--ease-out) forwards;
+  z-index: 0;
+}
+.nav-btn .fx-ink,
+#new-chat-btn .fx-ink {
+  background: rgba(var(--color-primary-rgb), 0.18);
+}
+
+#chat-page {
+  animation: page-in var(--dur-slow) var(--ease-out) both;
+}
+
+/* ---------- Bottom nav ---------- */
+#bottom-nav {
+  flex: 0 0 var(--nav-height) !important;
+  height: var(--nav-height);
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: var(--nav-gap) !important;
+  padding-top: 16px !important;
+  background: var(--surface-nav);
+}
+.nav-btn {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  min-width: 44px !important;
+  width: auto !important;
+  padding: 28px 6px 4px !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-family: var(--font-family) !important;
+  font-size: var(--font-size-nav) !important;
+  font-weight: var(--font-weight-medium) !important;
+  line-height: 1 !important;
+  color: var(--color-text-strong) !important;
+  opacity: var(--nav-inactive-opacity);
+}
+.nav-btn::before {
+  /* 아이콘은 mask 로 그려 currentColor 를 따라갑니다 */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 25px;
+  height: 24px;
+  margin-left: -12.5px;
+  background-color: currentColor;
+  -webkit-mask: var(--mask-icon) center / contain no-repeat;
+  mask: var(--mask-icon) center / contain no-repeat;
+  transition: transform var(--dur-base) var(--ease-spring);
+}
+.nav-chatbot {
+  --mask-icon: var(--icon-nav-chatbot);
+}
+.nav-profile {
+  --mask-icon: var(--icon-nav-profile);
+}
+.nav-btn.active {
+  color: var(--color-primary) !important;
+  opacity: 1;
+}
+.nav-btn.active::before {
+  animation: icon-bounce 520ms var(--ease-spring);
+}
+@media (hover: hover) {
+  .nav-btn:hover:not(.active) {
+    opacity: 1;
+  }
+  .nav-btn:hover::before {
+    transform: translateY(-2px);
+  }
+}
+.nav-btn:active {
+  transform: scale(var(--press-scale));
+}
+.nav-btn:focus-visible {
+  box-shadow: var(--focus-ring) !important;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+@keyframes plane-fly {
+  0% {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
+  }
+  45% {
+    transform: translate(26px, -26px) rotate(-18deg);
+    opacity: 0;
+  }
+  46% {
+    transform: translate(-22px, 22px) rotate(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
+  }
+}
+@keyframes plane-hover {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(2px, -2px);
+  }
+}
+@keyframes pending-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgba(var(--color-primary-rgb), 0);
+  }
+}
+@keyframes icon-bounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  35% {
+    transform: translateY(-5px) scale(1.12);
+  }
+  65% {
+    transform: translateY(1px) scale(0.96);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes pop-in {
+  from {
+    transform: scale(0.6);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes online-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* 모션 줄이기 설정을 켠 사용자에게는 애니메이션을 끕니다 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
