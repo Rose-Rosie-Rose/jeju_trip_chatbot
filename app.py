@@ -57,7 +57,7 @@ from typing import Iterator, Literal, TypedDict
 
 import gradio as gr
 
-import test_pdf as rag
+from rag import chatbot as rag
 
 logger = logging.getLogger(__name__)
 
@@ -166,9 +166,9 @@ FONT_HEAD = """
 def generate_reply(message: str, history: History) -> Iterator[str]:
     """사용자 메시지에 대한 봇 답변을 만듭니다.
 
-    test_pdf.py 의 RAG 파이프라인을 사용합니다.
-      검색(영어 질문 + 한국어 번역 질문) → 답변 생성(영어) → 실제 사용한 PDF·페이지를 출처로 덧붙임
-    현재는 이번 질문만으로 검색·답변하며, history 는 사용하지 않습니다.
+    rag/chatbot.py 의 RAG 파이프라인(rag.ask)을 사용합니다.
+      이전 대화를 반영해 검색어 생성 → 벡터 + 키워드 검색 → 답변 생성(영어)
+      → 실제 사용한 PDF·페이지를 출처로 덧붙임
 
     Args:
         message: 사용자가 방금 보낸 문장 (공백 제거된 str, 빈 문자열은 들어오지 않음)
@@ -194,12 +194,7 @@ def generate_reply(message: str, history: History) -> Iterator[str]:
         yield rag_chain.invoke({"question": message, "context": docs, "history": history})
     """
     try:
-        docs = rag.retrieve(get_db(), message)
-        if not docs:
-            yield rag.NOT_FOUND
-            return
-
-        answer, used_docs = rag.answer_in_english(message, docs)
+        answer, used_docs = rag.ask(get_db(), message, history[:-1])
     except Exception:
         logger.exception("RAG 답변 생성 실패: %s", message)
         raise
