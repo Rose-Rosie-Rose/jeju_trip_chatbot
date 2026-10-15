@@ -1,0 +1,64 @@
+{
+  "_doc": [
+    "화면 문구 모음. app.py 에서는 S[\"섹션\"][\"키\"] 로 읽습니다. 예) S[\"chat\"][\"error\"]",
+    "default_locale: 기본 언어. 실행 시 환경변수 APP_LOCALE=ko 로 바꿀 수 있습니다.",
+    "새 문구를 추가할 때는 en / ko 양쪽에 같은 키를 넣어주세요. (키가 없으면 KeyError)",
+    "chat.greeting = 첫 인사말 / chat.error = 모델 오류 시 말풍선 / composer.empty_warning = 빈 메시지 토스트 / profile.alert = Profile 탭 알림창",
+    "이 _doc 키는 코드에서 읽지 않습니다."
+  ],
+  "default_locale": "en",
+  "locales": {
+    "en": {
+      "page_title": "Chatbot AI",
+      "header": {
+        "title": "Chatbot AI",
+        "status_online": "Online",
+        "new_chat": "New chat"
+      },
+      "composer": {
+        "placeholder": "Feel free to ask!",
+        "send": "Send",
+        "empty_warning": "Please type a message."
+      },
+      "chat": {
+        "greeting": "Hello there! How may I assist you today?",
+        "error": "Something went wrong. Please try again in a moment.",
+        "copy": "Copy",
+        "copied": "Copied"
+      },
+      "nav": {
+        "chatbot": "Chatbot",
+        "profile": "Profile"
+      },
+      "profile": {
+        "alert": "The profile screen is coming soon."
+      }
+    },
+    "ko": {
+      "page_title": "Chatbot AI",
+      "header": {
+        "title": "Chatbot AI",
+        "status_online": "온라인",
+        "new_chat": "새 대화"
+      },
+      "composer": {
+        "placeholder": "편하게 물어보세요!",
+        "send": "보내기",
+        "empty_warning": "메시지를 입력해 주세요."
+      },
+      "chat": {
+        "greeting": "안녕하세요! 무엇을 도와드릴까요?",
+        "error": "답변을 가져오지 못했어요. 잠시 후 다시 시도해 주세요.",
+        "copy": "복사",
+        "copied": "복사됨"
+      },
+      "nav": {
+        "chatbot": "Chatbot",
+        "profile": "Profile"
+      },
+      "profile": {
+        "alert": "프로필 화면은 아직 준비 중이에요."
+      }
+    }
+  }
+}
