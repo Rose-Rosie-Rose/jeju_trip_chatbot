@@ -65,6 +65,7 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).resolve().parent   # 이 파일이 있는 폴더 (실행 위치와 무관)
 ASSETS = BASE_DIR / "assets"                 # strings.json, css, js
 ICONS = ASSETS / "icons"                     # svg / png 아이콘
+IMAGES = ASSETS / "images"                   # 마스코트 등 일러스트
 
 
 # ---------------------------------------------------------------------------
@@ -117,6 +118,7 @@ ICON_FILES = {
     "online": "online.svg",
     "nav-chatbot": "nav_chatbot.svg",
     "nav-profile": "nav_profile.svg",
+    "sparkle": "sparkle.svg",
 }
 
 
@@ -261,6 +263,27 @@ def initial_history() -> History:
     return [{"role": "assistant", "content": S["chat"]["greeting"]}]
 
 
+def has_user_message(history: History) -> bool:
+    """대화에 사용자 메시지가 하나라도 있으면 True → 첫 화면 대신 대화 화면을 보여줍니다."""
+    return any(m.get("role") == "user" for m in history or [])
+
+
+def show_conversation(history: History):
+    """첫 화면(welcome) ↔ 대화 화면(chatbot) 전환. 반환 순서: (welcome, chatbot)"""
+    started = has_user_message(history)
+    return gr.update(visible=not started), gr.update(visible=started)
+
+
+def reset_conversation():
+    """'새 대화' 버튼: 대화 기록 초기화 + 첫 화면 다시 표시. 반환 순서: (chatbot, welcome)"""
+    return gr.update(value=initial_history(), visible=False), gr.update(visible=True)
+
+
+def welcome_card_html(text: str) -> str:
+    """첫 화면 말풍선(✦ 아이콘 + 문구) HTML."""
+    return f'<div class="welcome-line"><span class="sparkle" aria-hidden="true"></span><p>{text}</p></div>'
+
+
 def add_user_message(message: str, history: History):
     """1단계: 입력창 문장을 대화에 추가하고 입력창을 비웁니다.
 
@@ -321,8 +344,10 @@ PROFILE_ALERT_JS = """
 #   chatbot          gr.Chatbot  값 = History (list[ChatMessage])  ← 대화 기록 전체
 #   msg              gr.Textbox  값 = str                          ← 입력창
 #   send_btn         gr.Button   전송 버튼 (답변 중에는 잠김)
-#   new_chat_btn     gr.Button   헤더 오른쪽 '새 대화' 버튼 → chatbot 을 initial_history() 로 초기화
-#   chat_page        gr.Column   채팅 화면 전체
+#   new_chat_btn     gr.Button   헤더 오른쪽 '새 대화' 버튼 → 대화 초기화 + 첫 화면으로
+#   chat_page        gr.Column   채팅 화면 전체 (첫 화면 + 대화 + 입력창)
+#   welcome          gr.Column   첫 화면 (마스코트, 인사말, 추천 질문). 첫 메시지를 보내면 숨겨짐
+#   chip_buttons     list[gr.Button]  추천 질문 버튼 (문구: S["welcome"]["chips"])
 #   nav_chat_btn     gr.Button   하단 탭 'Chatbot' (항상 선택 상태)
 #   nav_profile_btn  gr.Button   하단 탭 'Profile' → 알림창만 띄움 (PROFILE_ALERT_JS)
 # elem_id / elem_classes 는 CSS(app.css)가 사용하므로 이름을 바꾸지 마세요.
@@ -350,8 +375,28 @@ with gr.Blocks(title=S["page_title"], fill_height=True, elem_id="app-shell") as 
 
     # ---- Chat page --------------------------------------------------------
     with gr.Column(elem_id="chat-page", visible=True) as chat_page:
+        # 첫 화면: 대화를 시작하기 전까지만 보입니다.
+        with gr.Column(elem_id="welcome", visible=True) as welcome:
+            gr.HTML(
+                f'<img class="welcome-mascot" src="{_data_uri(IMAGES / "mascot.png")}" '
+                f'alt="{S["welcome"]["mascot_alt"]}">',
+                padding=False,
+            )
+            gr.HTML(
+                f'<div class="welcome-card">{welcome_card_html(S["welcome"]["intro"])}</div>',
+                padding=False,
+            )
+            with gr.Column(elem_classes=["welcome-card", "welcome-suggest"]):
+                gr.HTML(welcome_card_html(S["welcome"]["suggest_title"]), padding=False)
+                with gr.Row(elem_id="chip-row"):
+                    chip_buttons = [
+                        gr.Button(chip["label"], elem_classes=["chip"], scale=0, min_width=0)
+                        for chip in S["welcome"]["chips"]
+                    ]
+
         chatbot = gr.Chatbot(
             value=initial_history(),
+            visible=False,          # 첫 메시지를 보내면 show_conversation 이 보이게 바꿉니다.
             elem_id="chat",
             show_label=False,
             container=False,
@@ -391,21 +436,31 @@ with gr.Blocks(title=S["page_title"], fill_height=True, elem_id="app-shell") as 
         )
 
     # ---- Events -----------------------------------------------------------
-    # 전송 흐름 (Enter 또는 전송 버튼):
-    #   add_user_message → lock(버튼 잠금) → stream_bot(답변 스트리밍) → unlock(버튼 해제)
+    # 전송 흐름 (Enter / 전송 버튼 / 추천 질문 버튼):
+    #   add_user_message → show_conversation(첫 화면 숨김) → lock(버튼 잠금)
+    #   → stream_bot(답변 스트리밍) → unlock(버튼 해제)
     # queue=False 단계는 즉시 실행, stream_bot 은 큐에서 실행되어 여러 사용자가 동시에 써도 안전합니다.
     lock = lambda: gr.update(interactive=False, elem_classes=["fx-ripple", "pending"])
     unlock = lambda: gr.update(interactive=True, elem_classes=["fx-ripple"])
 
-    for trigger in (msg.submit, send_btn.click):
-        (
-            trigger(add_user_message, [msg, chatbot], [msg, chatbot], queue=False)
+    def send_flow(event):
+        """event(사용자 동작) 뒤에 전송 흐름 전체를 이어 붙입니다."""
+        return (
+            event.then(add_user_message, [msg, chatbot], [msg, chatbot], queue=False)
+            .then(show_conversation, chatbot, [welcome, chatbot], queue=False)
             .then(lock, None, send_btn, queue=False)
             .then(stream_bot, chatbot, chatbot)
             .then(unlock, None, send_btn, queue=False)
         )
 
-    new_chat_btn.click(initial_history, None, chatbot, queue=False)
+    for trigger in (msg.submit, send_btn.click):
+        send_flow(trigger(None, None, None, queue=False))
+
+    # 추천 질문 버튼: 질문 문장을 입력창에 넣고 바로 전송합니다.
+    for button, chip in zip(chip_buttons, S["welcome"]["chips"]):
+        send_flow(button.click(lambda prompt=chip["prompt"]: prompt, None, msg, queue=False))
+
+    new_chat_btn.click(reset_conversation, None, [chatbot, welcome], queue=False)
 
     # Profile 탭: 서버 함수 없이(fn=None) 브라우저에서 알림창만 띄웁니다. 화면 전환 없음.
     nav_profile_btn.click(fn=None, inputs=None, outputs=None, js=PROFILE_ALERT_JS)

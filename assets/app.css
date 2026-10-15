@@ -420,6 +420,122 @@ footer {
   animation: page-in var(--dur-slow) var(--ease-out) both;
 }
 
+/* ---------- Welcome (첫 화면) ---------- */
+/* 대화를 시작하기 전까지 보이는 화면: 마스코트 + 인사말 + 추천 질문 */
+#welcome {
+  flex: 1 1 auto !important;
+  min-height: 0;
+  justify-content: flex-end !important;
+  gap: var(--welcome-gap) !important;
+  padding: 24px 0 8px !important;
+  overflow-y: auto;
+  animation: page-in var(--dur-slow) var(--ease-out) both;
+}
+#welcome > * {
+  flex: 0 0 auto !important; /* Gradio 가 넣는 flex-grow 무시 → 내용 높이만큼만 */
+}
+#welcome .block,
+#welcome .html-container,
+#welcome .prose {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.welcome-mascot {
+  display: block;
+  width: var(--mascot-width);
+  height: auto;
+  margin-left: 4px;
+  transform-origin: 50% 100%;
+  animation:
+    mascot-in var(--dur-slow) var(--ease-spring) both,
+    mascot-bob 3.2s ease-in-out 600ms infinite;
+}
+.welcome-card {
+  width: fit-content;
+  max-width: var(--bubble-bot-max);
+  padding: var(--welcome-card-padding) !important;
+  background: var(--bubble-bot-bg) !important;
+  border: 1px solid var(--bubble-bot-border) !important;
+  border-radius: var(--welcome-card-radius) !important;
+  animation: bubble-in var(--dur-slow) var(--ease-out) both;
+}
+.welcome-suggest {
+  width: var(--bubble-bot-max);
+  max-width: 100%;
+  gap: 10px !important;
+  overflow: hidden;
+  animation-delay: 120ms;
+}
+.welcome-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--bubble-bot-text);
+  word-break: keep-all;
+}
+.welcome-line p {
+  margin: 0;
+}
+.welcome-line .sparkle {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  background: var(--icon-sparkle) center / contain no-repeat;
+}
+
+/* 추천 질문 칩: 2줄로 놓고 넘치면 가로 스크롤 */
+#chip-row {
+  display: grid !important;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, auto);
+  justify-content: start;
+  gap: var(--chip-gap) !important;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px 2px 4px !important;
+}
+#chip-row::-webkit-scrollbar {
+  display: none;
+}
+#chip-row .chip {
+  height: var(--chip-height);
+  min-width: 0 !important;
+  width: auto !important;
+  padding: 0 var(--chip-padding-x) !important;
+  background: var(--surface-input) !important;
+  border: 1px solid var(--chip-border) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+  font-family: var(--font-family) !important;
+  font-size: var(--chip-font-size) !important;
+  font-weight: var(--font-weight-regular) !important;
+  color: var(--color-text) !important;
+  white-space: nowrap;
+  transition:
+    transform var(--dur-base) var(--ease-spring),
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+@media (hover: hover) {
+  #chip-row .chip:hover {
+    background: var(--chip-hover-bg) !important;
+    border-color: var(--color-primary) !important;
+    transform: translateY(-1px);
+  }
+}
+#chip-row .chip:active {
+  transform: scale(var(--press-scale));
+}
+#chip-row .chip:focus-visible {
+  box-shadow: var(--focus-ring) !important;
+}
+
 /* ---------- Bottom nav ---------- */
 #bottom-nav {
   flex: 0 0 var(--nav-height) !important;
@@ -589,6 +705,26 @@ footer {
   100% {
     transform: scale(2.4);
     opacity: 0;
+  }
+}
+
+@keyframes mascot-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes mascot-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-1.5deg);
   }
 }
 

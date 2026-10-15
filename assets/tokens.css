@@ -40,6 +40,18 @@
   --bubble-bot-max: 90%;                                  /* 308 / (380 - 복사버튼 30) */
   --bubble-gap: 24px;
 
+  /* ---------- Welcome (첫 화면) ---------- */
+  --mascot-width: 150px;
+  --welcome-gap: 16px;
+  --welcome-card-radius: 16px;
+  --welcome-card-padding: 14px 16px;
+  --chip-height: 32px;
+  --chip-padding-x: 12px;
+  --chip-gap: 8px;
+  --chip-font-size: 13px;
+  --chip-border: rgba(var(--color-primary-rgb), 0.7);
+  --chip-hover-bg: rgba(var(--color-primary-rgb), 0.12);
+
   /* ---------- Input ---------- */
   --input-height: 54px;
   --input-radius: 12px;
