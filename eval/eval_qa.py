@@ -31,6 +31,9 @@ CHUNK_SIZE = 500
 CHUNK_OVERLAP = 100
 NOT_FOUND = "I'm sorry, I couldn't find that information in the document."
 
+# 질문 CSV 기본 경로 (tune_chunks.py도 이 값을 사용)
+DEFAULT_CSV = Path(__file__).resolve().parent / "testqa20.csv"
+
 JUDGE_PROMPT = """당신은 여행 안내 챗봇의 답변을 채점하는 평가자입니다.
 질문, 기대 정답, 챗봇 답변(영어)을 보고 아래 기준으로 판정하세요.
 
@@ -105,8 +108,16 @@ def ask_bot(db, question: str):
     if not docs:
         return NOT_FOUND, ""
 
-    answer = answer_in_english(question, docs)
-    return answer, format_sources(docs)
+    result = answer_in_english(question, docs)
+
+    # test_pdf.answer_in_english가 (답변, 실제 사용 문서)를 반환하는 버전이면
+    # 실제로 쓴 문서만 출처로 표시 / 문자열만 반환하면 검색된 문서 전체 표시
+    if isinstance(result, tuple):
+        answer, used_docs = result
+    else:
+        answer, used_docs = result, docs
+
+    return answer, format_sources(used_docs) if used_docs else ""
 
 
 def is_no_info(expected: str) -> bool:
@@ -160,6 +171,9 @@ def run_eval(db, df: pd.DataFrame, verbose: bool = True) -> pd.DataFrame:
         rows.append({
             "No": row["No"],
             "질문 유형": row["질문 유형"],
+            "질문": row["질문"],
+            "English (EN)": question,
+            "정답": expected,
             "판정": verdict,
             "챗봇 답변": answer,
             "출처": src,
@@ -178,7 +192,7 @@ def score(verdicts) -> float:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("csv", help="질문 리스트 CSV 경로")
+    parser.add_argument("csv", nargs="?", default=str(DEFAULT_CSV), help="질문 리스트 CSV 경로")
     parser.add_argument("--col", default="개선 전", help='결과를 적을 열 ("개선 전" 또는 "개선 후")')
     args = parser.parse_args()
 
