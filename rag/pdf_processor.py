@@ -27,8 +27,8 @@ def load_and_split_pdf(pdf_path: str):
         raise ValueError("PDF에서 문서를 추출하지 못했습니다.")
 
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=100,
+        chunk_size=800,
+        chunk_overlap=150,
         length_function=len,
         is_separator_regex=False,
     )

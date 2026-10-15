@@ -24,7 +24,8 @@
         "greeting": "Hello! What would you like to know about JEJU Island?",
         "error": "Something went wrong. Please try again in a moment.",
         "copy": "Copy",
-        "copied": "Copied"
+        "copied": "Copied",
+        "sources": "Sources"
       },
       "nav": {
         "chatbot": "Chatbot",
@@ -50,7 +51,8 @@
         "greeting": "안녕하세요! 무엇을 도와드릴까요?",
         "error": "답변을 가져오지 못했어요. 잠시 후 다시 시도해 주세요.",
         "copy": "복사",
-        "copied": "복사됨"
+        "copied": "복사됨",
+        "sources": "출처"
       },
       "nav": {
         "chatbot": "Chatbot",
