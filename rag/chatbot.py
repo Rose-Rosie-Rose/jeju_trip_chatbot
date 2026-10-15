@@ -338,8 +338,54 @@ def retrieve(db, question: str, history=None):
     return search(db, [standalone, *queries])
 
 
+RERANK_PROMPT = """You select which guidebook excerpts are useful for answering
+a traveler's question about Jeju. The excerpts are in Korean.
+
+Keep an excerpt if it contains information that answers the question or part
+of it, including excerpts that answer indirectly: they describe a matching
+place or dish without using the question's words (e.g. for "dishes that
+aren't spicy", a dish described as 담백한 matches). When unsure, keep it.
+Drop excerpts that are only about the same general topic but do not match
+what is asked.
+
+Return JSON only: {"keep": [<excerpt numbers>]}
+"""
+
+
+def rerank(question: str, docs) -> list:
+    """검색된 청크 중 질문에 실제로 도움이 되는 것만 고른다.
+
+    비슷한 주제의 청크가 많이 섞이면 답변 모델이 정답 청크를 놓치는 경우가 있어
+    (예: "안 뜨거운 국물" 질문에 뜨거운 국물 요리 청크가 섞임) 답변 전에 걸러낸다.
+    하나도 고르지 못하면 원래 목록을 그대로 쓴다.
+    """
+    if len(docs) <= 1:
+        return docs
+
+    excerpts = "\n\n".join(
+        f"[#{i}]\n{doc.page_content}" for i, doc in enumerate(docs, start=1)
+    )
+    res = client.chat.completions.create(
+        model=MODEL,
+        temperature=0,
+        response_format={"type": "json_object"},
+        messages=[
+            {"role": "system", "content": RERANK_PROMPT},
+            {"role": "user", "content": f"Question: {question}\n\nExcerpts:\n{excerpts}"},
+        ],
+    )
+
+    try:
+        keep = json.loads(res.choices[0].message.content).get("keep", [])
+        idxs = sorted({int(i) for i in keep if 1 <= int(i) <= len(docs)})
+    except (json.JSONDecodeError, AttributeError, TypeError, ValueError):
+        return docs
+
+    return [docs[i - 1] for i in idxs] or docs
+
+
 def ask(db, question: str, history=None):
-    """질문 하나를 처리한다: 검색어 생성 → 검색 → 답변 생성.
+    """질문 하나를 처리한다: 검색어 생성 → 검색 → 관련 청크 선별 → 답변 생성.
 
     history: 이번 질문 이전의 대화 (OpenAI messages 형식, 없으면 None)
     반환값: (답변 텍스트, 실제로 사용한 문서 리스트)
@@ -348,7 +394,7 @@ def ask(db, question: str, history=None):
     print(f"(검색용 질의: {standalone} / {queries})")
 
     # 인사·잡담이면 검색 없이 답변 (SYSTEM_PROMPT 의 인사 규칙)
-    docs = search(db, [standalone, *queries]) if queries else []
+    docs = rerank(standalone, search(db, [standalone, *queries])) if queries else []
 
     return answer_in_english(question, docs, history)
 

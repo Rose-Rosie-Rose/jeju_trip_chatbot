@@ -1,0 +1,191 @@
+﻿회차,No,질문 유형,질문,English (EN),정답,판정,챗봇 답변,출처,판정 이유,검색어,검색된 페이지,이전 대화 사용
+1,1,-,아부오름 갔다오는데 얼마나 걸려?,How long does it take to go to Abu Oreum and back?,1 hour,✅,The total hiking time for Abu Oreum (아부오름) is 1 hour.,"Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — page 8","챗봇의 답변이 기대 정답과 일치하며, 핵심 내용이 정확하게 전달되었습니다.",아부오름 왕복 소요 시간 | 아부오름,"jjmountain p.8, jjmountain p.4, jjmountain p.11, jjmountain p.22, jjmountain p.7, jjmountain p.20, jjmountain p.5, jjmountain p.25, jjmountain p.10, jjmountain p.21",
+1,2,-,갈치는 어느 계절에 가장 많이 먹나요?,In which season is galchi (hairtail fish) eaten the most?,Autumn,✅,The document mentions that Jeju's galchi (hairtail fish) is a representative fish of autumn.,"Sources:
+  • Jeju Food Guide (jjfood.pdf) — page 10",챗봇 답변이 갈치가 가을에 대표적인 생선이라는 내용을 포함하고 있어 기대 정답과 일치합니다.,갈치가 가장 많이 먹히는 계절은 언제인가요? | 갈치 요리 추천 | 갈치 먹거리 골목 | 갈치,"jjfood p.11, jjfood p.10, jjfood p.9, jjfood p.24, jjfood p.25, jjfood p.25, jjfood p.5, jjfood p.24, jjfood p.14, jjfood p.7",
+1,3,-,고등어 요리 3개만 추천해줘,Recommend just 3 godeungeo (mackerel) dishes.,"godeungeo-hoe (mackerel sashimi), godeungeo-jorim (braised mackerel), godeungeo-gui (grilled mackerel)",✅,"You should try these three mackerel dishes in Jeju:
+
+- Godeungeo Hoe (고등어회): Fresh mackerel sashimi that is not fishy and has a rich flavor when paired with spicy dipping sauce and vegetables.
+- Godeungeo Jorim (고등어조림): Stewed mackerel with radish and vegetables in a spicy-sweet sauce, perfect for rice.
+- Godeungeo Gui (고등어구이): Grilled mackerel salted and cooked to perfection, offering a fresh and savory taste.
+
+These dishes highlight the deliciousness of mackerel in Jeju cuisine.","Sources:
+  • Jeju Food Guide (jjfood.pdf) — pages 14–15, 24","챗봇이 기대 정답에 포함된 고등어 요리 3개를 정확히 언급했으며, 부가 설명이 있어도 핵심 내용이 일치합니다.",고등어 요리 추천 | 고등어 구이 맛집 | 고등어 조림 레시피 | 고등어,"jjfood p.15, jjfood p.5, jjfood p.24, jjfood p.25, jjfood p.24, jjfood p.25, jjocean p.12, jjfood p.13, jjfood p.14, jjfood p.24",
+1,4,-,돔베가 뭐야?,What is dombe?,Cutting board,✅,"Dombae-gogi (돔베고기) is a dish made from Jeju black pork. The term ""dombae"" refers to a cutting board in the Jeju dialect, and the dish is served by slicing the meat on the board to enjoy the juicy flavors immediately. It is known for its rich, succulent taste.","Sources:
+  • Jeju Food Guide (jjfood.pdf) — page 17",챗봇이 'dombae'의 의미를 제시하며 기대 정답인 'cutting board'를 포함하고 있다.,돔베가 무엇인가요?,"jjfood p.17, jjocean p.18, jjfood p.6, jjocean p.26, jjfood p.12, jjnight p.13, jjnight p.12, jjfood p.22, jjfood p.25, jjocean p.15",
+1,5,-,제주 바다에서 하면 안되는 금지 행동 있나?,Are there any prohibited activities in the Jeju sea?,"1. Take your trash with you or dispose of it at designated locations.
+2. Do not collect marine life (such as shellfish and seaweed) without permission.
+3. Do not damage fishing facilities or coastal structures.
+4. Refrain from making noise, such as shouting loudly or using speakers.
+5. If bringing a pet, check whether access is permitted and keep it under control safely.",✅,"Yes, there are several prohibited activities in the Jeju sea, including:
+
+- Collecting marine life (such as shells and seaweed) without permission.
+- Damaging fishing facilities and coastal structures.
+- Creating noise, such as using loudspeakers.
+- Not disposing of trash properly; it must be taken away or disposed of in designated areas.
+- Engaging in illegal activities, which can result in fines.
+
+It's important to follow these rules to protect the marine environment and ensure a pleasant experience for everyone.","Sources:
+  • Jeju Ocean Guide (jjocean.pdf) — pages 5, 12, 28","챗봇 답변이 기대 정답의 핵심 내용을 모두 포함하고 있으며, 표현이 다르더라도 의미가 일치합니다.",제주 바다에서 금지된 활동이 있나요? | 제주 바다에서의 안전 수칙 | 제주 해양 활동 가이드,"jjocean p.5, jjocean p.3, jjocean p.8, jjocean p.18, jjocean p.28, jjocean p.12, jjocean p.17, jjocean p.17, jjnight p.5, jjocean p.12",
+1,6,-,제주도 보다 밑에 있는 섬이 뭐야?,Which island lies south of Jejudo?,Marado,✅,The island that lies south of Jejudo is Marado (마라도). It is located at the southernmost point of South Korea and features a landscape characterized by grasslands and coastal cliffs.,"Sources:
+  • Jeju Ocean Guide (jjocean.pdf) — page 6","챗봇의 답변은 기대 정답인 'Marado'와 일치하며, 추가 설명도 포함되어 있어 정확합니다.",제주도 남쪽에 위치한 섬은 무엇인가요?,"jjocean p.6, jjocean p.9, jjmountain p.2, jjfood p.3, jjocean p.7, jjnight p.13, jjocean p.25, jjocean p.13, jjnight p.8, jjocean p.26",
+1,7,-,돔베고기(흑돼지삽겹살)로 유명한 골목은 어디야?,"Which alley is famous for dombe-gogi (heukdwaeji samgyeopsal, black pork belly)?","Arang Joeul Street, Seogwipo-si",✅,"The alley famous for dombe-gogi (돔베고기) is Arangjoeul Street (아랑조을거리) in Seogwipo. It is known for its local food restaurants that serve various Jeju dishes, including black pork and dombe-gogi.","Sources:
+  • Jeju Night Tour Guide (jjnight.pdf) — page 9","챗봇의 답변은 기대 정답의 핵심 내용과 일치하며, 추가적인 설명도 포함되어 있어 정확하다.",돔베고기 먹거리 골목 거리 | 흑돼지 맛집 추천 | 흑돼지 돔베고기,"jjfood p.17, jjfood p.25, jjfood p.24, jjfood p.18, jjfood p.25, jjfood p.16, jjfood p.5, jjfood p.21, jjnight p.9, jjfood p.20",
+1,8,-,제주 밤 버스 투어에서 말하는 야경 명소가 어디야?,Where are the night-view spots mentioned on the Jeju Night Bus Tour?,"One of the following: Iho Horse Lighthouse, Dodubong, Jeju International Airport, Gwandeokjeong and Jeju Mokgwana, or Dongmun Market and Sanjicheon",△,"The night-view spots mentioned on the Jeju Night Bus Tour include:
+
+- Dongmun Traditional Market: Enjoy various foods and a vibrant night market atmosphere.
+- Sanjicheon: Experience a fountain show with changing lights and music.
+- Dodubong: Offers beautiful views of the sunset and night scenery from the summit.
+- Nuwemaru Street: A pedestrian-friendly area with shops and cafes, lively at night with lights and busking.
+
+These locations provide a mix of cultural experiences and scenic views during the night.","Sources:
+  • Jeju Night Tour Guide (jjnight.pdf) — page 9","챗봇이 추천한 장소 중 일부는 기대 정답에 포함되어 있지만, 'Nuwemaru Street'는 목록에 없는 장소로 포함되어 있어 일부 정보가 잘못되었다.",제주 야경버스투어에서 언급된 야경 명소는 어디인가요? | 제주 야경 명소 | 제주 야경 투어 추천,"jjnight p.9, jjnight p.6, jjnight p.3, jjnight p.9, jjocean p.3, jjocean p.18, jjmountain p.14, jjnight p.5, jjnight p.5, jjnight p.8",
+1,9,-,아부오름에서 서우봉까지 버스로 얼마나 걸려?,How long does it take by bus from Abu Oreum to Seoubong?,Information not available in the source / No answer provided. The document does not include public transportation routes or travel times between the two locations.,✅,"I'm sorry, I couldn't find that information in the document.",,챗봇이 정보가 없다고 답변했으므로 기대 정답과 일치한다.,아부오름에서 서우봉까지 버스 소요 시간 | 아부오름 서우봉,"jjmountain p.8, jjmountain p.4, jjmountain p.20, jjnight p.13, jjocean p.25, jjmountain p.11, jjmountain p.21, jjmountain p.16, jjmountain p.7, jjmountain p.5",
+1,10,-,오늘 밤 21시 이후에 알밤골목거리에는 여는 식당이 있나요?,Are any restaurants open after 9 PM tonight on Albam Golmok-geori?,Information not available in the source / No answer provided. The document does not include prices or real-time operating information for specific restaurants.,✅,"I'm sorry, I couldn't find that information in the document.",,챗봇이 정보가 없다고 답변했으므로 기대 정답과 일치합니다.,알밤 골목거리에서 9시 이후에 열리는 식당 | 알밤 골목거리 맛집 | 알밤 골목거리,"jjnight p.9, jjnight p.9, jjnight p.9, jjfood p.25, jjfood p.25, jjfood p.24, jjnight p.12, jjfood p.5, jjnight p.4, jjnight p.8",
+1,11,-,마라도행 여객선 오늘 출발 시간이랑 남는 자리 몇 개인지 알려줘,Tell me today's departure times for the ferry to Marado and how many seats are left.,Information not available in the source / No answer provided. Real-time sailing and reservation information is beyond the scope of the document.,✅,"I'm sorry, I couldn't find that information in the document.",,챗봇이 정보가 없다고 하여 기대 정답과 일치한다.,마도로 가는 페리의 오늘 출발 시간은? | 마도로 가는 페리의 남은 좌석 수는? | 마라도,"jjnight p.6, jjocean p.6, jjmountain p.9, jjocean p.6, jjfood p.8, jjnight p.10, jjmountain p.21, jjocean p.5, jjnight p.13, jjnight p.7",
+1,12,-,초보자가 가기 좋은 오름 2곳 이상 추천해줘,Recommend at least 2 oreum that are good for beginners.,"Abu Oreum, Seoubong, Gunsan, Byeoldobong, Dodubong",✅,"I recommend the following oreums that are suitable for beginners:
+
+- Dodu-bong (도두봉): It is not high and has a gentle slope, making it easy to climb. The hiking time is 1 hour. 
+- Abeo-oreum (아부오름): This oreum has a height of 51m and takes about 1 hour to hike. The trail offers beautiful views of many oreums in the eastern region of Jeju.
+
+Both are great choices for a comfortable hiking experience.","Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — pages 8, 10",챗봇이 추천한 Dodu-bong과 Abeo-oreum은 기대 정답 목록에 있는 오름 중 하나 이상을 포함하고 있어 핵심 내용이 일치합니다.,초보자를 위한 오름 | 초보자에게 적합한 오름,"jjmountain p.4, jjmountain p.10, jjocean p.15, jjmountain p.8, jjmountain p.20, jjnight p.5, jjmountain p.7, jjocean p.16, jjmountain p.7, jjmountain p.23",
+1,13,-,서우봉과 도두봉에서 볼 수 있는 명소가 어디야?,What attractions can be seen from Seoubong and Dodubong?,"The guidebook states that Seoubong offers views of Hamdeok Beach and Bukchon Village, while Dodubong offers views of airplanes taking off and landing and the coastal road scenery.",✅,"From Seoubong (서우봉), you can enjoy views of Hamdeok Beach (함덕해변) and Bukchon Village (북촌마을). Dodubong (도두봉) offers a view of planes taking off and landing at Jeju Airport, as well as the surrounding area.","Sources:
+  • Jeju Night Tour Guide (jjnight.pdf) — page 9
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — page 10","챗봇의 답변이 기대 정답의 핵심 내용을 모두 포함하고 있으며, 표현이 다르더라도 의미가 일치합니다.",서우봉과 도두봉에서 볼 수 있는 명소는 무엇인가요? | 서우봉 전망 좋은 곳 | 도두봉에서의 경치 | 서우봉 도두봉,"jjmountain p.10, jjmountain p.16, jjnight p.4, jjnight p.9, jjmountain p.24, jjocean p.25, jjmountain p.8, jjocean p.8, jjmountain p.4, jjocean p.18",
+1,14,-,제주도의 대표적인 전통 국물 요리 2가지를 알려줘,Tell me 2 representative traditional soup dishes of Jejudo.,"gogi-guksu (pork noodle soup), mom-guk (pork soup with gulfweed), gosari-yukgaejang (spicy beef-style soup with bracken and pork)",△,"Two representative traditional soup dishes of Jejudo are:
+
+- 몸국 (Momguk): Made with 모자반 (mojaban), a type of seaweed, boiled in pork broth and thickened with buckwheat flour. It has a rich and smooth flavor, often served during family celebrations.
+- 고사리육개장 (Gosari Yukgaejang): A hearty soup made with pork, gosari (bracken fern), and thickened with buckwheat flour. The ingredients are simmered until they blend together, creating a rich and flavorful dish.","Sources:
+  • Jeju Food Guide (jjfood.pdf) — pages 17–18","챗봇이 몸국과 고사리육개장을 언급했지만, gogi-guksu (돼지고기 국수)가 빠져 있어 일부 정보가 누락되었다.",제주도 전통 국물 요리 2가지 | 제주도 해물탕 | 제주도 고등어조림,"jjfood p.15, jjfood p.18, jjfood p.24, jjfood p.24, jjfood p.13, jjfood p.25, jjfood p.17, jjocean p.4, jjmountain p.2, jjfood p.3",
+1,15,-,"보목 자리돔 축제 일정, 장소, 체험 등을 알려줘","Tell me the schedule, venue, and activities of the Bomok Jaridom (damselfish) Festival.","May–June, around Bomok Port in Seogwipo-si; activities such as catching Jaridom (damselfish) with bare hands are introduced.",△,"The Bomok Jaridom Festival is held between May and June in the Bomok area of Seogwipo City. The festival features various activities such as:
+
+- Catching jaridom by hand
+- Releasing wish lanterns
+- Catching sea snails and sea cucumbers
+- Walking along the Bomok Olle Trail
+
+The festival lasts for three days and offers tasting events for jaridom dishes like grilled jaridom, jaridom salad, and jaridom sashimi. The beautiful scenery includes views of Seopseom Island and other nearby islets.","Sources:
+  • Jeju Food Guide (jjfood.pdf) — page 8
+  • Jeju Ocean Guide (jjocean.pdf) — page 27","축제 일정과 장소는 맞지만, 기대 정답에 포함된 '맨손으로 자리돔 잡기' 외에 다른 활동들이 추가되어 있어 일부 정보가 다릅니다.",보목자리돔 축제 일정과 장소와 활동은 무엇인가요? | 제주 보목자리돔 축제 행사 | 보목자리돔 축제 체험 활동 | 보목자리돔 축제,"jjfood p.8, jjocean p.27, jjocean p.27, jjnight p.12, jjnight p.12, jjnight p.12, jjfood p.6, jjfood p.7, jjocean p.21, jjocean p.27",
+1,16,-,(이거 질의 연속으로 할 때=앞내용기억하나? 쓰기 좋을 것 같아요. O-비교종합1 바로다음에) 알려준 오름 2곳의 일반적인 탐방 시간을 비교해줘.,Compare the typical hiking times of the 2 oreum you recommended.,Abu Oreum: 1 hour; Gunsan: 1–2 hours; Byeoldobong: 1 hour; Dodubong: 1 hour,✅,"Both Dodu-bong (도두봉) and Abeo-oreum (아부오름) have a typical hiking time of 1 hour. Therefore, they are equal in terms of the time it takes to hike each of them.","Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — pages 8, 10",챗봇이 두 오름의 탐방 시간을 정확히 비교하여 1시간으로 일치한다고 언급했기 때문에 기대 정답의 핵심 내용과 일치합니다.,도두봉과 아부오름의 일반적인 등산 시간은 얼마인가요? | 초보자를 위한 오름 | 도두봉 아부오름,"jjmountain p.10, jjmountain p.8, jjmountain p.4, jjmountain p.11, jjmountain p.16, jjmountain p.22, jjocean p.15, jjocean p.18, jjmountain p.25, jjmountain p.7",Q12
+1,17,-,제주도 시내에 밤산책하기 좋은 곳과 서귀포에서 야식 먹기 좋은 장소를 각각 알려줘,Tell me good places for a night walk in downtown Jeju-si and good places for a late-night snack in Seogwipo.,"Jeju-si: Tapdong Square and Culture Street, etc. / Seogwipo: Arang Joeul Street",△,"For a night walk in downtown Jeju-si, consider these spots:
+
+- Nuwemaru Street: A pedestrian-friendly area with trendy shops and cafes, lively with lights and busking at night.
+- Chilsungro Cultural Street: A historic shopping street with various brand stores and sculptures, bustling even at night.
+- Lee Jung Seop Street: A cultural street dedicated to the artist Lee Jung Seop, perfect for a calm evening stroll with beautiful lighting.
+
+For late-night snacks in Seogwipo, you can visit:
+
+- Arangjoel Street: A local food alley with various traditional restaurants serving dishes like black pork, braised mackerel, and Dombae-gogi.
+
+The guide does not provide specific late-night hours for these places, so it's best to check before visiting.","Sources:
+  • Jeju Night Tour Guide (jjnight.pdf) — page 9","제주도 시내의 추천 장소 중 'Tapdong Square'가 빠져있고, 'Nuwemaru Street'와 'Chilsungro Cultural Street'는 적절하지만 'Lee Jung Seop Street'는 기대 정답과 다소 어긋나므로 일부만 맞는 것으로 평가함.",제주 시 야경 산책하기 좋은 곳 | 서귀포 야식 맛집 | 제주 시 서귀포,"jjocean p.21, jjfood p.25, jjocean p.10, jjocean p.10, jjocean p.21, jjmountain p.26, jjnight p.9, jjmountain p.9, jjnight p.9, jjnight p.6",
+1,18,-,등산이 익숙하지 않은데 가볍게 올라갈 만한 오름을 알려줘,I'm not used to hiking. Which oreum can I climb easily?,"The guidebook lists Abu Oreum, Seoubong, Gunsan, Byeoldobong, and Dodubong as beginner-friendly oreum (volcanic cones).",✅,"For beginners, I recommend the following oreums:
+
+- **Dodu-bong (도두봉)**: It's not high and has a gentle slope, making it easy to climb. The hiking time is 1 hour.
+- **Abu-oreum (아부오름)**: This oreum is also easy to climb, taking about 1 hour. 
+- **Seou-bong (서우봉)**: This one offers a short trail and is suitable for all ages, with a hiking time of 1 hour and 30 minutes.
+
+These oreums provide beautiful views and are perfect for those new to hiking.","Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — pages 4, 8, 10",챗봇이 기대 정답에 포함된 모든 오름을 언급하며 초보자에게 적합하다고 설명했기 때문에 핵심 내용이 일치합니다.,어디서 쉽게 오름을 오를 수 있나요? | 초보자를 위한 오름 | 오름,"jjmountain p.4, jjmountain p.10, jjmountain p.5, jjmountain p.11, jjmountain p.8, jjmountain p.20, jjmountain p.14, jjmountain p.25, jjocean p.15, jjmountain p.6",
+1,19,-,비행기가 지나다니는 거 볼 수 있는 데 어디야,Where can I watch planes flying overhead?,Dodubong. The guidebook states that visitors can watch airplanes taking off and landing near Jeju International Airport.,✅,"You can watch planes flying overhead at Dodubong (도두봉), which is located near Jeju Airport. It is a popular spot where you can see the takeoff and landing of airplanes. The hike to the top takes about 1 hour, and the trail is gentle, making it easy to climb.","Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — page 10",챗봇 답변이 기대 정답의 핵심 내용인 'Dodubong'과 '비행기가 이착륙하는 모습'을 포함하고 있어 일치합니다.,비행기가 하늘을 나는 곳은 어디인가요?,"jjnight p.6, jjmountain p.10, jjnight p.9, jjnight p.8, jjnight p.10, jjnight p.13, jjnight p.11, jjnight p.3, jjocean p.2, jjocean p.7",
+1,20,-,안 뜨거운 국물 음식도 있음?,Are there any soup dishes that aren't served hot?,"Jarimulhoe (cold raw damselfish soup). It is made by pouring cold water over thinly sliced Jaridom (damselfish), vegetables, and seasoning. Hanchi mulhoe (cold raw squid soup). Fresh hanchi (spear squid) is thinly sliced, mixed with crunchy vegetables and seasoning sauce, and then topped with cold water.",❌,"I'm sorry, I couldn't find that information in the document.",,문서에 정답이 있는데 챗봇이 '찾을 수 없다'고 답했다.,뜨겁지 않은 국물 요리가 있나요? | 시원한 국물 요리 | 여름에 좋은 국물 요리,"jjfood p.18, jjfood p.13, jjfood p.11, jjfood p.9, jjfood p.19, jjfood p.7, jjfood p.17, jjfood p.21, jjmountain p.5, jjnight p.13",
+2,1,-,아부오름 갔다오는데 얼마나 걸려?,How long does it take to go to Abu Oreum and back?,1 hour,✅,The total hiking time for Abu Oreum (아부오름) is 1 hour.,"Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — page 8","챗봇의 답변이 기대 정답과 일치하며, 핵심 내용이 정확하게 전달되었습니다.",아부오름 왕복 소요 시간 | 아부오름,"jjmountain p.8, jjmountain p.4, jjmountain p.11, jjmountain p.22, jjmountain p.7, jjmountain p.20, jjmountain p.5, jjmountain p.25, jjmountain p.10, jjmountain p.21",
+2,2,-,갈치는 어느 계절에 가장 많이 먹나요?,In which season is galchi (hairtail fish) eaten the most?,Autumn,✅,The document mentions that Jeju's galchi (hairtail fish) is a representative fish of autumn.,"Sources:
+  • Jeju Food Guide (jjfood.pdf) — page 10",챗봇 답변이 갈치가 가을에 대표적인 생선이라는 내용을 포함하고 있어 기대 정답과 일치합니다.,갈치가 가장 많이 먹히는 계절은 언제인가요? | 갈치 요리 추천 | 갈치 먹거리 골목 | 갈치,"jjfood p.11, jjfood p.10, jjfood p.9, jjfood p.24, jjfood p.25, jjfood p.25, jjfood p.5, jjfood p.24, jjfood p.14, jjfood p.7",
+2,3,-,고등어 요리 3개만 추천해줘,Recommend just 3 godeungeo (mackerel) dishes.,"godeungeo-hoe (mackerel sashimi), godeungeo-jorim (braised mackerel), godeungeo-gui (grilled mackerel)",✅,"You should try these three mackerel dishes in Jeju:
+
+- Godeungeo Hoe (고등어회): Fresh mackerel sashimi served with a spicy dipping sauce and vegetables, offering a clean and rich taste.
+- Godeungeo Jorim (고등어조림): Stewed mackerel with radish and vegetables in a spicy-sweet sauce, perfect for pairing with rice.
+- Godeungeo Gui (고등어구이): Grilled mackerel salted and cooked to perfection, providing a fresh and savory flavor.
+
+These dishes highlight the deliciousness of mackerel in Jeju cuisine.","Sources:
+  • Jeju Food Guide (jjfood.pdf) — pages 14–15, 24","챗봇이 기대 정답에 포함된 고등어 요리 3개를 정확히 언급했으며, 부가 설명이 있어도 핵심 내용이 일치합니다.",고등어 요리 추천 | 고등어 구이 맛집 | 고등어 조림 레시피 | 고등어,"jjfood p.15, jjfood p.5, jjfood p.24, jjfood p.25, jjfood p.24, jjfood p.25, jjocean p.12, jjfood p.13, jjfood p.14, jjfood p.24",
+2,4,-,돔베가 뭐야?,What is dombe?,Cutting board,✅,"Dombae-gogi (돔베고기) is a dish made from Jeju black pork. The term ""dombae"" refers to a cutting board in the Jeju dialect, and the dish is served on a cutting board to enjoy the juicy flavor of the meat. The meat is sliced and served immediately to preserve its moisture, allowing diners to savor the fresh, juicy taste.","Sources:
+  • Jeju Food Guide (jjfood.pdf) — page 17",챗봇이 'dombae'가 제주 방언으로 도마를 의미한다고 정확히 언급했기 때문에 기대 정답의 핵심 내용과 일치한다.,돔베가 무엇인가요?,"jjfood p.17, jjocean p.18, jjfood p.6, jjocean p.26, jjfood p.12, jjnight p.13, jjnight p.12, jjfood p.22, jjfood p.25, jjocean p.15",
+2,5,-,제주 바다에서 하면 안되는 금지 행동 있나?,Are there any prohibited activities in the Jeju sea?,"1. Take your trash with you or dispose of it at designated locations.
+2. Do not collect marine life (such as shellfish and seaweed) without permission.
+3. Do not damage fishing facilities or coastal structures.
+4. Refrain from making noise, such as shouting loudly or using speakers.
+5. If bringing a pet, check whether access is permitted and keep it under control safely.",△,"Yes, there are several prohibited activities in the Jeju sea, including:
+
+- Collecting marine life (such as shells and seaweed) without permission.
+- Damaging fishing facilities and coastal structures.
+- Creating noise disturbances, such as using loudspeakers.
+- Not following designated areas for swimming and water activities.
+- Engaging in illegal activities, which may incur fines.
+
+It's important to respect the marine environment and follow local regulations.","Sources:
+  • Jeju Ocean Guide (jjocean.pdf) — pages 5, 12","핵심 내용은 맞지만, 기대 정답에 포함된 '쓰레기 처리'와 '애완동물 관련' 정보가 빠져있고, '지정된 수영 구역'에 대한 언급은 불필요한 오류로 보인다.",제주 바다에서 금지된 활동이 있나요? | 제주 바다에서 할 수 있는 활동 | 제주 해양 스포츠,"jjocean p.18, jjocean p.8, jjocean p.5, jjocean p.3, jjocean p.15, jjocean p.17, jjocean p.12, jjocean p.19, jjocean p.15, jjocean p.12",
+2,6,-,제주도 보다 밑에 있는 섬이 뭐야?,Which island lies south of Jejudo?,Marado,✅,The island that lies south of Jejudo is Marado (마라도). It is located at the southernmost point of South Korea and is characterized by a landscape of grasslands and coastal cliffs.,"Sources:
+  • Jeju Ocean Guide (jjocean.pdf) — page 6","챗봇의 답변은 기대 정답인 'Marado'를 정확히 언급하고 있으며, 추가 설명도 포함되어 있어 핵심 내용이 일치합니다.",제주도 남쪽에 위치한 섬은 무엇인가요?,"jjocean p.6, jjocean p.9, jjmountain p.2, jjfood p.3, jjocean p.7, jjnight p.13, jjocean p.25, jjocean p.13, jjnight p.8, jjocean p.26",
+2,7,-,돔베고기(흑돼지삽겹살)로 유명한 골목은 어디야?,"Which alley is famous for dombe-gogi (heukdwaeji samgyeopsal, black pork belly)?","Arang Joeul Street, Seogwipo-si",✅,"The alley famous for dombe-gogi (돔베고기) is Arangjoel Street (아랑조을거리) in Seogwipo. It is known for its local food restaurants that serve various Jeju dishes, including heukdwaeji (black pork) and dombe-gogi.","Sources:
+  • Jeju Night Tour Guide (jjnight.pdf) — page 9","챗봇의 답변은 기대 정답의 핵심 내용인 '돔베고기(흑돼지삽겹살)로 유명한 골목'을 정확히 언급하고 있으며, 추가 설명도 관련 정보를 제공하고 있다.",돔베고기 먹거리 골목 거리 | 흑돼지 삼겹살 맛집 | 돔베고기 흑돼지 삼겹살,"jjfood p.17, jjfood p.25, jjfood p.25, jjfood p.24, jjfood p.18, jjfood p.16, jjfood p.5, jjnight p.9, jjfood p.21, jjfood p.13",
+2,8,-,제주 밤 버스 투어에서 말하는 야경 명소가 어디야?,Where are the night-view spots mentioned on the Jeju Night Bus Tour?,"One of the following: Iho Horse Lighthouse, Dodubong, Jeju International Airport, Gwandeokjeong and Jeju Mokgwana, or Dongmun Market and Sanjicheon",△,"The night-view spots mentioned on the Jeju Night Bus Tour include:
+
+- Dongmun Market (동문시장) where you can enjoy various foods.
+- Sanjicheon (산지천) for a fountain show with music and changing lights.
+- Dodubong (도두봉) offers a beautiful view of the sunset and night scenery.
+- Nuwemaru Street (누웨마루거리) is a vibrant pedestrian area with shops and cafes, lively at night.
+
+These locations provide a mix of cultural experiences and scenic views during the night.","Sources:
+  • Jeju Night Tour Guide (jjnight.pdf) — pages 6, 9","챗봇이 제시한 답변에 기대 정답 목록에 없는 'Nuwemaru Street'가 포함되어 있어 일부 정보가 맞지만, 핵심 명소가 빠져 있다.",제주 야경버스투어에서 언급된 야경 명소는 어디인가요? | 제주 야경 명소 | 제주 야경을 즐길 수 있는 장소 | 제주 야경버스투어,"jjnight p.9, jjnight p.3, jjnight p.6, jjnight p.13, jjmountain p.14, jjnight p.9, jjnight p.11, jjocean p.3, jjocean p.13, jjnight p.5",
+2,9,-,아부오름에서 서우봉까지 버스로 얼마나 걸려?,How long does it take by bus from Abu Oreum to Seoubong?,Information not available in the source / No answer provided. The document does not include public transportation routes or travel times between the two locations.,✅,"I'm sorry, I couldn't find that information in the document.",,챗봇이 정보가 없다고 답변했으므로 기대 정답과 일치합니다.,아부오름에서 서우봉까지 버스로 얼마나 걸리나요? | 서우봉까지 가는 버스 시간 | 아부오름에서 서우봉까지 대중교통 | 아부오름 서우봉,"jjmountain p.8, jjmountain p.4, jjnight p.13, jjnight p.6, jjocean p.25, jjocean p.25, jjocean p.8, jjmountain p.20, jjnight p.13, jjnight p.4",
+2,10,-,오늘 밤 21시 이후에 알밤골목거리에는 여는 식당이 있나요?,Are any restaurants open after 9 PM tonight on Albam Golmok-geori?,Information not available in the source / No answer provided. The document does not include prices or real-time operating information for specific restaurants.,✅,"I'm sorry, I couldn't find that information in the document.",,챗봇이 정보가 없다고 답변했으므로 기대 정답과 일치합니다.,알밤골목거리에서 9시 이후에 열려 있는 식당 | 알밤골목거리 맛집 추천 | 알밤골목거리,"jjnight p.9, jjnight p.9, jjfood p.25, jjfood p.25, jjfood p.24, jjnight p.4, jjnight p.12, jjnight p.11, jjfood p.5, jjnight p.13",
+2,11,-,마라도행 여객선 오늘 출발 시간이랑 남는 자리 몇 개인지 알려줘,Tell me today's departure times for the ferry to Marado and how many seats are left.,Information not available in the source / No answer provided. Real-time sailing and reservation information is beyond the scope of the document.,✅,"I'm sorry, I couldn't find that information in the document.",,챗봇이 정보가 없다고 하여 기대 정답과 일치합니다.,마라도행 페리 오늘 출발 시간 | 마라도행 페리 잔여 좌석 수 | 마라도,"jjocean p.6, jjocean p.6, jjnight p.6, jjmountain p.9, jjocean p.10, jjmountain p.19, jjocean p.5, jjnight p.14, jjocean p.27, jjmountain p.21",
+2,12,-,초보자가 가기 좋은 오름 2곳 이상 추천해줘,Recommend at least 2 oreum that are good for beginners.,"Abu Oreum, Seoubong, Gunsan, Byeoldobong, Dodubong",✅,"I recommend the following oreums that are suitable for beginners:
+
+- Dodu-bong (도두봉): It is not high and has a gentle slope, making it easy to climb. The hiking time is 1 hour. 
+- Abeo-oreum (아부오름): This oreum has a height of 51 meters and takes about 1 hour to hike. The trail offers beautiful views of many oreums in the eastern region of Jeju.
+
+Both are great choices for a comfortable hiking experience.","Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — pages 8, 10","챗봇이 추천한 Dodu-bong과 Abeo-oreum은 초보자에게 적합한 오름으로, 기대 정답의 핵심 내용과 일치합니다.",초보자를 위한 오름 | 초보자에게 적합한 오름,"jjmountain p.4, jjmountain p.10, jjocean p.15, jjmountain p.8, jjmountain p.20, jjnight p.5, jjmountain p.7, jjocean p.16, jjmountain p.7, jjmountain p.23",
+2,13,-,서우봉과 도두봉에서 볼 수 있는 명소가 어디야?,What attractions can be seen from Seoubong and Dodubong?,"The guidebook states that Seoubong offers views of Hamdeok Beach and Bukchon Village, while Dodubong offers views of airplanes taking off and landing and the coastal road scenery.",✅,"From Seoubong (서우봉), you can enjoy views of Hamdeok Beach (함덕해변) and Bukchon Village (북촌마을). Dodubong (도두봉) offers a view of airplanes taking off and landing, as it is located near Jeju Airport.","Sources:
+  • Jeju Night Tour Guide (jjnight.pdf) — page 9
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — page 10",챗봇의 답변이 기대 정답의 핵심 내용을 모두 포함하고 있어 일치합니다.,서우봉과 도두봉에서 볼 수 있는 명소는 무엇인가요? | 서우봉 전망 좋은 곳 | 도두봉에서의 경치 | 서우봉 도두봉,"jjmountain p.10, jjmountain p.16, jjnight p.4, jjnight p.9, jjmountain p.24, jjocean p.25, jjmountain p.8, jjocean p.8, jjmountain p.4, jjocean p.18",
+2,14,-,제주도의 대표적인 전통 국물 요리 2가지를 알려줘,Tell me 2 representative traditional soup dishes of Jejudo.,"gogi-guksu (pork noodle soup), mom-guk (pork soup with gulfweed), gosari-yukgaejang (spicy beef-style soup with bracken and pork)",✅,"Two representative traditional soup dishes of Jeju are:
+
+- 고기국수 (Gogi Guksu): A noodle dish made with pork bone broth and topped with boiled pork, offering a rich and hearty flavor.
+- 몸국 (Mom Guk): A soup made with the local seaweed called 모자반 (mojaban) in a pork broth, known for its rich and smooth taste.
+
+These dishes are well-loved and reflect the local culinary heritage.","Sources:
+  • Jeju Food Guide (jjfood.pdf) — pages 18–19","챗봇이 기대 정답에 포함된 두 가지 요리를 정확히 언급했으며, 설명도 적절하다.",제주도의 대표적인 전통 국물 요리는 무엇인가요? | 제주도에서 유명한 해장국 | 제주도에서 꼭 먹어봐야 할 국물 요리,"jjfood p.18, jjfood p.17, jjfood p.13, jjfood p.15, jjfood p.19, jjfood p.11, jjnight p.13, jjfood p.24, jjfood p.25, jjfood p.24",
+2,15,-,"보목 자리돔 축제 일정, 장소, 체험 등을 알려줘","Tell me the schedule, venue, and activities of the Bomok Jaridom (damselfish) Festival.","May–June, around Bomok Port in Seogwipo-si; activities such as catching Jaridom (damselfish) with bare hands are introduced.",△,"The Bomok Jaridom Festival is held between May and June in the Bomok area of Seogwipo City. The festival features various activities such as:
+
+- Catching jaridom by hand
+- Releasing wish lanterns
+- Catching sea snails and other marine life
+- Walking along the Bomok Olle Trail
+
+The festival lasts for three days and offers tasting events for jaridom dishes like grilled jaridom, jaridom salad, and jaridom sashimi. The beautiful scenery includes views of Seoseokak and Oedolgae, along with the natural monument Seopseom.","Sources:
+  • Jeju Food Guide (jjfood.pdf) — page 8
+  • Jeju Ocean Guide (jjocean.pdf) — page 27","축제 일정과 장소는 맞지만, 체험 활동 중 '바로 손으로 자리돔 잡기'가 포함되어야 하는데 다른 활동들이 추가되어 있어 일부만 맞다.",보목자리돔 축제 일정과 장소와 활동은 무엇인가요? | 제주 보목자리돔 축제 활동 | 보목자리돔 축제 장소 | 보목자리돔 축제,"jjfood p.8, jjocean p.27, jjnight p.12, jjocean p.27, jjnight p.12, jjnight p.12, jjfood p.6, jjfood p.7, jjocean p.21, jjocean p.27",
+2,16,-,(이거 질의 연속으로 할 때=앞내용기억하나? 쓰기 좋을 것 같아요. O-비교종합1 바로다음에) 알려준 오름 2곳의 일반적인 탐방 시간을 비교해줘.,Compare the typical hiking times of the 2 oreum you recommended.,Abu Oreum: 1 hour; Gunsan: 1–2 hours; Byeoldobong: 1 hour; Dodubong: 1 hour,✅,"Both Dodu-bong (도두봉) and Abeo-oreum (아부오름) have a typical hiking time of 1 hour. Therefore, they are equally accessible for beginners in terms of time required for the hike.","Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — pages 8, 10","챗봇이 두 오름의 탐방 시간을 정확하게 비교했으며, 기대 정답의 핵심 내용과 일치합니다.",도두봉과 아부오름의 일반적인 등산 시간은 얼마인가요? | 초보자를 위한 오름 | 도두봉 아부오름,"jjmountain p.10, jjmountain p.8, jjmountain p.4, jjmountain p.11, jjmountain p.16, jjmountain p.22, jjocean p.15, jjmountain p.25, jjmountain p.7, jjmountain p.20",Q12
+2,17,-,제주도 시내에 밤산책하기 좋은 곳과 서귀포에서 야식 먹기 좋은 장소를 각각 알려줘,Tell me good places for a night walk in downtown Jeju-si and good places for a late-night snack in Seogwipo.,"Jeju-si: Tapdong Square and Culture Street, etc. / Seogwipo: Arang Joeul Street",△,"For a night walk in downtown Jeju-si, consider these places:
+
+- Nuwemaru Street: A pedestrian-friendly area with trendy shops and cafes, lively at night with lights and busking.
+- Chilsungro Cultural Street: A historic shopping street with various brand stores and sculptures, bustling even at night.
+- Lee Jung Seop Street: A cultural street dedicated to the artist Lee Jung Seop, perfect for a calm evening stroll with beautiful lighting.
+
+For late-night snacks in Seogwipo, you can visit:
+
+- Arangjoel Street: A local food alley with various restaurants serving Jeju specialties like black pork, galchi-jorim (braised hairtail), and dombae-gogi (pork belly).
+
+The guide does not provide specific late-night hours for these places.","Sources:
+  • Jeju Night Tour Guide (jjnight.pdf) — page 9","제주도 시내의 추천 장소 중 Tapdong Square가 빠져 있고, 서귀포의 야식 장소는 정확하지만 'Arang Joeul Street'의 표기 오류가 있어 일부만 맞다.",제주 시 야경 산책하기 좋은 곳 | 서귀포 야식 맛집 | 제주 시 서귀포,"jjocean p.21, jjfood p.25, jjocean p.10, jjocean p.10, jjocean p.21, jjmountain p.26, jjnight p.9, jjmountain p.9, jjnight p.9, jjnight p.6",
+2,18,-,등산이 익숙하지 않은데 가볍게 올라갈 만한 오름을 알려줘,I'm not used to hiking. Which oreum can I climb easily?,"The guidebook lists Abu Oreum, Seoubong, Gunsan, Byeoldobong, and Dodubong as beginner-friendly oreum (volcanic cones).",✅,"For beginners, I recommend the following oreums:
+
+- **Dodu-bong (도두봉)**: It's not high and has a gentle slope, making it easy to climb. The hiking time is 1 hour.
+- **Abu-oreum (아부오름)**: This oreum is also easy to climb, with a hiking time of 1 hour. You can enjoy views of many oreums and the sea from the top.
+- **Seowoo-bong (서우봉)**: This oreum has a short trail and is suitable for all ages, with a hiking time of 1 hour and 30 minutes.
+
+These options should provide a pleasant hiking experience for you!","Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — pages 4, 8, 10","챗봇이 기대 정답에 포함된 Abu Oreum, Dodu-bong, Seoubong을 언급하며 초보자에게 적합한 오름을 추천했기 때문에 핵심 내용이 일치합니다.",어디에서 쉽게 오름을 오를 수 있나요? | 초보자를 위한 오름 | 오름,"jjmountain p.4, jjmountain p.10, jjmountain p.8, jjmountain p.5, jjmountain p.11, jjmountain p.20, jjmountain p.25, jjmountain p.14, jjmountain p.6, jjocean p.15",
+2,19,-,비행기가 지나다니는 거 볼 수 있는 데 어디야,Where can I watch planes flying overhead?,Dodubong. The guidebook states that visitors can watch airplanes taking off and landing near Jeju International Airport.,✅,"You can watch planes flying overhead at Dodubong (도두봉), which is located near Jeju Airport. It's a great spot to see the takeoff and landing of airplanes. The hike to the summit takes about 1 hour, and the trail is gentle, making it easy to climb.","Sources:
+  • Jeju Oreum & Mountain Guide (jjmountain.pdf) — page 10",챗봇 답변이 Dodubong과 제주 공항 근처에서 비행기를 볼 수 있다는 핵심 내용을 포함하고 있다.,비행기가 하늘을 나는 곳은 어디인가요? | 비행기 관람 명소 | 제주도 비행기 관람하기 좋은 장소,"jjnight p.6, jjmountain p.10, jjnight p.9, jjnight p.10, jjocean p.6, jjnight p.13, jjnight p.14, jjnight p.14, jjmountain p.2, jjfood p.3",
+2,20,-,안 뜨거운 국물 음식도 있음?,Are there any soup dishes that aren't served hot?,"Jarimulhoe (cold raw damselfish soup). It is made by pouring cold water over thinly sliced Jaridom (damselfish), vegetables, and seasoning. Hanchi mulhoe (cold raw squid soup). Fresh hanchi (spear squid) is thinly sliced, mixed with crunchy vegetables and seasoning sauce, and then topped with cold water.",❌,"I'm sorry, I couldn't find that information in the document.",,문서에 정답이 있는데 챗봇이 '찾을 수 없다'고 답했다.,뜨겁지 않은 국물 요리가 있나요? | 시원한 국물 요리 | 여름에 좋은 국물 요리,"jjfood p.18, jjfood p.13, jjfood p.11, jjfood p.9, jjfood p.19, jjfood p.7, jjfood p.17, jjfood p.21, jjmountain p.5, jjnight p.13",
