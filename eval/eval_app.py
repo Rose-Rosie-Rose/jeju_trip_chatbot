@@ -29,7 +29,7 @@ import pandas as pd
 
 from rag import chatbot as rag
 
-DEFAULT_CSV = PROJECT_ROOT / "jeju_chatbot_evaluation_20.csv"
+DEFAULT_CSV = EVAL_DIR / "testqa20.csv"
 JUDGE_MODEL = "gpt-4o-mini"
 
 # 앞 질문의 대화를 이어받아야 하는 문항: {후속 질문 번호: 앞 질문 번호}
@@ -44,12 +44,17 @@ JUDGE_PROMPT = """당신은 여행 안내 챗봇의 답변을 채점하는 평�
 - ❌ : 틀렸거나, 답을 해야 하는데 "찾을 수 없다"고 했다.
 
 특별 규칙:
+- 기대 정답의 핵심이 답변에 들어 있으면, 부가 설명이 더 있어도 ✅.
+  핵심과 어긋나는 내용(예: 시간·장소를 다르게 말함)이 있을 때만 깎는다.
+- 기대 정답이 "One of the following / ~ 중 한 곳"이면, 그중 하나 이상 맞게 말하면 ✅.
+- 기대 정답이 후보 목록이고 질문이 "N개 추천 / N곳 이상"처럼 일부만 요구하면,
+  후보 중 요구 개수 이상 맞으면 ✅. 목록에 없는 대상이 섞여 있으면 △.
+- "이전 대화"가 주어지면, 앞에서 챗봇이 실제로 추천한 대상을 기준으로 채점한다.
+  기대 정답 목록에서 그 대상의 값과 일치하면 ✅.
 - 기대 정답이 "자료에 정보 없음/답변 유보"인 경우에만: 챗봇이 정보가 없다고 하거나
   "가이드에 나와 있지 않다"처럼 답변을 유보했으면 ✅, 지어낸 구체 정보
   (시간, 가격, 좌석, 영업 여부 등)를 제시했으면 ❌.
 - 기대 정답에 구체적인 내용이 있는데 챗봇이 "찾을 수 없다"고 했으면 ❌.
-- 기대 정답에 여러 후보가 나열되고 질문이 "N개 추천"처럼 일부만 요구하면,
-  후보 중에서 요구 개수만큼 맞게 답하면 ✅.
 
 JSON으로만 답하세요: {"verdict": "✅" | "△" | "❌", "reason": "한국어로 한두 문장"}
 """
@@ -75,18 +80,30 @@ def q_num(no: str) -> int | None:
 
 # ---------- 챗봇 호출 / 채점 ----------
 def ask_bot(db, question: str, history=None):
-    """app.py와 같은 rag.ask() 호출. (답변, 출처 문자열)"""
+    """rag.ask()와 같은 순서(검색어 생성 → 검색 → 답변)로 실행하고,
+    디버깅용으로 검색어와 검색된 페이지도 함께 돌려준다.
+    ※ rag.ask()의 흐름을 바꾸면 여기도 같이 맞춰 주세요.
+
+    반환값: (답변, 출처, 검색어, 검색된 페이지)
+    """
     with contextlib.redirect_stdout(io.StringIO()):  # "(검색용 질의: ...)" 출력 숨김
-        answer, used_docs = rag.ask(db, question, history)
+        standalone, queries = rag.plan_queries(question, history)
+        docs = rag.search(db, [standalone, *queries]) if queries else []
+        answer, used_docs = rag.answer_in_english(question, docs, history)
+
     sources = rag.format_sources(used_docs) if used_docs else ""
-    return answer, sources
+    searched = " | ".join(queries)
+    retrieved = ", ".join(
+        f"{Path(rag.pdf_file(d)).stem} p.{rag.page_no(d)}" for d in docs
+    )
+    return answer, sources, searched, retrieved
 
 
 def is_no_info(expected: str) -> bool:
     return "not available" in expected.lower() or "정보 없음" in expected
 
 
-def judge(question: str, expected: str, answer: str):
+def judge(question: str, expected: str, answer: str, context: str = ""):
     # 정답이 있는데 고정 문구로 "못 찾음"이면 LLM에 묻지 않고 바로 ❌
     if answer.strip() == rag.NOT_FOUND and not is_no_info(expected):
         return "❌", "문서에 정답이 있는데 챗봇이 '찾을 수 없다'고 답했다."
@@ -99,7 +116,11 @@ def judge(question: str, expected: str, answer: str):
             {"role": "system", "content": JUDGE_PROMPT},
             {
                 "role": "user",
-                "content": f"질문: {question}\n\n기대 정답: {expected}\n\n챗봇 답변: {answer}",
+                "content": (
+                    f"질문: {question}\n\n"
+                    + (f"이전 대화:\n{context}\n\n" if context else "")
+                    + f"기대 정답: {expected}\n\n챗봇 답변: {answer}"
+                ),
             },
         ],
     )
@@ -123,7 +144,7 @@ def run_eval(db, df: pd.DataFrame) -> pd.DataFrame:
         num = q_num(row["No"])
 
         # 후속 질문이면 앞 질문의 대화를 history로 넘김 (app.py에서 이어서 묻는 것과 동일)
-        history = None
+        history, context = None, ""
         prev = FOLLOW_UPS.get(num)
         if prev in answers_by_num:
             prev_q, prev_a = answers_by_num[prev]
@@ -131,12 +152,14 @@ def run_eval(db, df: pd.DataFrame) -> pd.DataFrame:
                 {"role": "user", "content": prev_q},
                 {"role": "assistant", "content": prev_a},
             ]
+            context = f"사용자: {prev_q}\n챗봇: {prev_a}"
 
         try:
-            answer, src = ask_bot(db, question, history)
-            verdict, reason = judge(row["질문"], expected, answer)
+            answer, src, searched, retrieved = ask_bot(db, question, history)
+            verdict, reason = judge(row["질문"], expected, answer, context)
         except Exception as e:
-            answer, src, verdict, reason = f"(오류) {e}", "", "❌", "실행 중 오류"
+            answer, src, searched, retrieved = f"(오류) {e}", "", "", ""
+            verdict, reason = "❌", "실행 중 오류"
 
         answers_by_num[num] = (question, answer)
         print(f"  [{row['No']}] {verdict} {reason}")
@@ -151,6 +174,8 @@ def run_eval(db, df: pd.DataFrame) -> pd.DataFrame:
             "챗봇 답변": answer,
             "출처": src,
             "판정 이유": reason,
+            "검색어": searched,
+            "검색된 페이지": retrieved,
             "이전 대화 사용": "Q" + str(prev) if history else "",
         })
     return pd.DataFrame(rows)
@@ -188,7 +213,9 @@ def write_report(path: Path, title: str, result: pd.DataFrame, scores):
             f"- 질문: {r['질문']}",
             f"- 정답: {r['정답']}",
             f"- 챗봇 답변: {answer}",
-            f"- 출처: {sources}",
+            f"- 출처(답변에 사용): {sources}",
+            f"- 검색어: {r['검색어'] or '-'}",
+            f"- 검색된 페이지: {r['검색된 페이지'] or '-'}",
             f"- 판정 이유: {r['판정 이유']}",
             "",
         ]
@@ -242,7 +269,7 @@ def main():
     print(result.groupby("질문 유형", sort=False)["판정"].apply(score).round(1).to_string())
     print(f"\n전체: ✅ {v.count('✅')} / △ {v.count('△')} / ❌ {v.count('❌')}")
     print(f"평균 점수: {sum(scores) / len(scores):.1f}점")
-    wrong = sorted(result.loc[result["판정"] != "✅", "No"].unique())
+    wrong = sorted(result.loc[result["판정"] != "✅", "No"].unique(), key=lambda n: q_num(n) or 0)
     print(f"틀린 문항: {', '.join(wrong) or '없음'}")
     print(f"\n결과 폴더: {out_dir}")
 
