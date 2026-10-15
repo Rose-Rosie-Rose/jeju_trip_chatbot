@@ -53,12 +53,24 @@ and answer in clear, natural English.
 Each excerpt starts with a tag like [#3 | Jeju Food Guide | p.5].
 
 Rules:
-- If the answer is not in the excerpts, reply exactly:
+- Use only the excerpts that are relevant to the question and ignore
+  the rest. Use restaurant names, addresses, and phone numbers only
+  when the user asks where to go or eat.
+- Never make up facts, prices, opening hours, or locations.
+- If NONE of the excerpts answer the question, reply exactly:
   "I'm sorry, I couldn't find that information in the document."
   and nothing else.
-- Never make up facts, prices, opening hours, or locations.
-- For Korean place names, give the English romanization with
-  the Korean in parentheses, e.g. Seongsan Ilchulbong (성산일출봉).
+- If only part of the question is answered, answer that part and say
+  what is missing in your own words, e.g. "The guide doesn't mention
+  its opening hours." Do not use the exact sentence above in this case.
+- For Korean place names, food names, and other proper nouns, give the
+  English romanization with the Korean in parentheses,
+  e.g. Seongsan Ilchulbong (성산일출봉), Dombae-gogi (돔베고기).
+- When you mention prices, opening hours, or phone numbers, add a short
+  note that they may have changed and should be checked before visiting.
+- Write plain text without Markdown (no **bold** or # headings).
+  Use "- " for lists. Keep it concise, under 150 words unless the user
+  asks for detail.
 - Do NOT write any source list or page numbers in your answer.
 - If you did answer, add one last line with the excerpt numbers
   you actually used, exactly in this format: USED: 1, 3
@@ -137,6 +149,9 @@ def to_korean_query(question: str) -> str:
                 "content": (
                     "Translate the user's question into natural Korean "
                     "for searching a Korean document. "
+                    "Convert romanized Korean names of places and foods "
+                    "back to Hangul (e.g. Seongsan Ilchulbong → 성산일출봉, "
+                    "heukdwaeji → 흑돼지). "
                     "Output only the translation."
                 ),
             },
@@ -205,7 +220,7 @@ def answer_in_english(question: str, docs):
 
     res = client.chat.completions.create(
         model=MODEL,
-        temperature=0.2,
+        temperature=0,
         messages=[
             {
                 "role": "system",
@@ -223,10 +238,6 @@ def answer_in_english(question: str, docs):
 
     text = res.choices[0].message.content.strip()
 
-    # 문서에 답이 없으면 출처 없이 반환
-    if NOT_FOUND in text:
-        return NOT_FOUND, []
-
     # "USED: 1, 3" 줄을 찾아 떼어내고, 실제 사용한 문서만 추림
     used_docs = []
     match = re.search(r"^\s*USED\s*:\s*(.*)$", text, re.IGNORECASE | re.MULTILINE)
@@ -236,6 +247,10 @@ def answer_in_english(question: str, docs):
             if 1 <= idx <= len(docs) and docs[idx - 1] not in used_docs:
                 used_docs.append(docs[idx - 1])
         text = (text[:match.start()] + text[match.end():]).strip()
+
+    # 답변 전체가 고정 문구일 때만 "답 없음"으로 처리 (부분 답변은 유지)
+    if text.strip("\"' ") == NOT_FOUND:
+        return NOT_FOUND, []
 
     return text, used_docs
 
