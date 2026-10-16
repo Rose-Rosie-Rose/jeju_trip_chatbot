@@ -84,7 +84,7 @@ OPENAI_API_KEY=sk-...
 ### 4. 실행
 
 ```powershell
-python test_pdf.py
+python app.py
 ```
 
 PDF 처리 후 `Question:` 프롬프트가 나타나면 질문을 입력합니다. 빈 줄 또는 `q`를 입력하면 종료합니다.
